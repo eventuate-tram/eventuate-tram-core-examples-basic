@@ -1,0 +1,28 @@
+
+allprojects {
+    group = "io.eventuate.tram.examples.basic"
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'maven'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+        jcenter()
+        maven {
+            url  "https://dl.bintray.com/eventuateio-oss/eventuate-maven-release"
+        }
+        eventuateMavenRepoUrl.split(',').each { repoUrl -> maven { url repoUrl } }
+    }
+
+
+}
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.11'
+}

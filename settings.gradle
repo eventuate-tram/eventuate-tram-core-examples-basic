@@ -1,0 +1,3 @@
+include 'eventuate-tram-examples-common'
+include 'eventuate-tram-examples-jdbc-kafka'
+include 'eventuate-tram-examples-in-memory'
