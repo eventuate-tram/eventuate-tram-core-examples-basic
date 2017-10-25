@@ -8,12 +8,12 @@ jobs:
       - checkout
       - restore_cache:
           key: eventuate-tram-examples-basic-{{ checksum "build.gradle" }}
-      - run: ./gradlew testClasses
+      - run: TERM=dumb ./gradlew testClasses
       - save_cache:
           paths:
             - ~/.gradle
           key: eventuate-tram-examples-basic-{{ checksum "build.gradle" }}
-      - run: ./build-and-test-all.sh
+      - run: TERM=dumb ./build-and-test-all.sh
       - store_test_results:
           path: "*/build/test-results"
 
