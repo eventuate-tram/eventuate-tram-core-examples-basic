@@ -7,11 +7,11 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-        key: eventuate-tram-examples-basic-{{ checksum "build.gradle" }}
+          key: eventuate-tram-examples-basic-{{ checksum "build.gradle" }}
       - run: ./gradlew testClasses
       - save_cache:
-        paths:
-          - ~/.gradle
+          paths:
+            - ~/.gradle
         key: eventuate-tram-examples-basic-{{ checksum "build.gradle" }}
       - run: ./build-and-test-all.sh
       - store_test_results:
