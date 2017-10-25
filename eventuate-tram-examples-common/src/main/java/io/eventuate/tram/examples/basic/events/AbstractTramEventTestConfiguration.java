@@ -22,16 +22,17 @@ public class AbstractTramEventTestConfiguration {
   }
 
   @Bean
-  public DomainEventDispatcher domainEventDispatcher(AbstractTramEventTestConfig config, TramEventTestEventConsumer target, MessageConsumer messageConsumer) {
+  public DomainEventDispatcher domainEventDispatcher(AbstractTramEventTestConfig config,
+                                                     TramEventTestEventConsumer target,
+                                                     MessageConsumer messageConsumer) {
     return new DomainEventDispatcher("eventDispatcherId" + config.getUniqueId(),
-            Collections.singletonMap(config.getAggregateType(),
-                    singleton(AccountDebited.class.getName())),
-            target, messageConsumer);
+            target.domainEventHandlers(),
+            messageConsumer);
   }
 
   @Bean
-  public TramEventTestEventConsumer tramEventTestTarget() {
-    return new TramEventTestEventConsumer();
+  public TramEventTestEventConsumer tramEventTestTarget(AbstractTramEventTestConfig config) {
+    return new TramEventTestEventConsumer(config.getAggregateType());
   }
 
 

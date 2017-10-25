@@ -8,9 +8,7 @@ docker-compose down -v
 
 docker-compose up -d
 
-echo waiting for MySQL
-
-sleep 15
+./wait-for-mysql.sh
 
 ./gradlew build
 

@@ -23,17 +23,13 @@ public class AbstractTramCommandTestConfiguration {
   }
 
   @Bean
-  public AbstractTramCommandTestCommandHandler abstractTramCommandTestTarget() {
-    return new AbstractTramCommandTestCommandHandler();
+  public AbstractTramCommandTestCommandHandler abstractTramCommandTestTarget(AbstractTramCommandTestConfig config) {
+    return new AbstractTramCommandTestCommandHandler(config.getCommandChannel());
   }
 
   @Bean
-  public CommandDispatcher commandDispatcher(AbstractTramCommandTestConfig config, AbstractTramCommandTestCommandHandler target,
-                                             ChannelMapping channelMapping,
-                                             MessageConsumer messageConsumer,
-                                             MessageProducer messageProducer) {
-
-    return new CommandDispatcher(config.getCommandDispatcheId(), target, config.getCommandChannel(), channelMapping, messageConsumer, messageProducer);
+  public CommandDispatcher commandDispatcher(AbstractTramCommandTestConfig config, AbstractTramCommandTestCommandHandler target) {
+    return new CommandDispatcher(config.getCommandDispatcheId(), target.getCommandHandlers());
   }
 
   @Bean

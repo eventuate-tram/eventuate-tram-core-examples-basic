@@ -32,7 +32,10 @@ public abstract class AbstractTramCommandTest {
   public void shouldInvokeCommand() throws InterruptedException {
     String subscriberId = "subscriberId" + config.getUniqueId();
     messageConsumer.subscribe(subscriberId, Collections.singleton(config.getCustomerChannel()), this::handleMessage);
-    String commandId = commandProducer.send(config.getCommandChannel(), config.getResource(), new DoSomethingCommand(), Collections.emptyMap());
+    String commandId = commandProducer.send(config.getCommandChannel(),
+            new DoSomethingCommand(),
+            config.getCustomerChannel(),
+            Collections.emptyMap());
 
     Message m = queue.poll(5, TimeUnit.SECONDS);
 
