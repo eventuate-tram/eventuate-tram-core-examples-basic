@@ -1,0 +1,28 @@
+version: 2
+jobs:
+  build:
+
+    working_directory: ~/eventuate-tram-examples-basic
+
+    docker:
+      - image: circleci/openjdk:8-jdk-browsers
+
+    steps:
+
+      - checkout
+
+      - restore_cache:
+          key: eventuate-tram-examples-basic-{{ checksum "build.gradle" }}
+
+      - run: ./gradlew testClasses
+
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: eventuate-tram-examples-basic-{{ checksum "build.gradle" }}
+
+      - run: ./build-and-test-all.sh
+
+      - store_test_results:
+          path: */build/test-results
+
