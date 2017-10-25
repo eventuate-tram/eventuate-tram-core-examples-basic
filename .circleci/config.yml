@@ -1,6 +1,7 @@
 version: 2
 jobs:
   build:
+    machine: true
     working_directory: ~/eventuate-tram-examples-basic
     docker:
       - image: circleci/openjdk:8-jdk-browsers
