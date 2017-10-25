@@ -11,9 +11,9 @@ jobs:
       - run: ./gradlew testClasses
       - save_cache:
         paths:
-          - ~/.m2
+          - ~/.gradle
         key: eventuate-tram-examples-basic-{{ checksum "build.gradle" }}
       - run: ./build-and-test-all.sh
       - store_test_results:
-        path: */build/test-results
+          path: "*/build/test-results"
 
