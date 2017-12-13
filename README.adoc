@@ -1,0 +1,11 @@
+
+= Eventuate Tram basic examples
+
+https://github.com/eventuate-tram/eventuate-tram-core[Eventuate Tram] implements transactional messaging for microservices written using JDBC.
+This project implements the examples shown in that project's https://github.com/eventuate-tram/eventuate-tram-core[README].
+
+It consists of the following modules:
+
+* `eventuate-tram-examples-common` - the examples for basic messaging, domain events and command/async reply
+* `eventuate-tram-examples-in-memory` - runs the examples using in-memory stubs
+* `eventuate-tram-examples-jdbc-kafka` - runs the examples using MySQL and Apache Kafka
