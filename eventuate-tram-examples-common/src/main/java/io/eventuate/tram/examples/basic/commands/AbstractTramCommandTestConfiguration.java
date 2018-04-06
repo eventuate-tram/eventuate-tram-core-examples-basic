@@ -4,8 +4,6 @@ import io.eventuate.tram.commands.common.ChannelMapping;
 import io.eventuate.tram.commands.common.DefaultChannelMapping;
 import io.eventuate.tram.commands.consumer.CommandDispatcher;
 import io.eventuate.tram.commands.producer.TramCommandProducerConfiguration;
-import io.eventuate.tram.messaging.consumer.MessageConsumer;
-import io.eventuate.tram.messaging.producer.MessageProducer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -23,12 +21,12 @@ public class AbstractTramCommandTestConfiguration {
   }
 
   @Bean
-  public AbstractTramCommandTestCommandHandler abstractTramCommandTestTarget(AbstractTramCommandTestConfig config) {
-    return new AbstractTramCommandTestCommandHandler(config.getCommandChannel());
+  public TramCommandTestCommandHandler abstractTramCommandTestTarget(AbstractTramCommandTestConfig config) {
+    return new TramCommandTestCommandHandler(config.getCommandChannel());
   }
 
   @Bean
-  public CommandDispatcher commandDispatcher(AbstractTramCommandTestConfig config, AbstractTramCommandTestCommandHandler target) {
+  public CommandDispatcher commandDispatcher(AbstractTramCommandTestConfig config, TramCommandTestCommandHandler target) {
     return new CommandDispatcher(config.getCommandDispatcheId(), target.getCommandHandlers());
   }
 
