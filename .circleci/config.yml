@@ -12,6 +12,6 @@ jobs:
           paths:
             - ~/.gradle
           key: eventuate-tram-core-examples-basic-{{ checksum "build.gradle" }}
-      - run: TERM=dumb ./build-and-test-all.sh
+      - run: TERM=dumb ./_build-and-test-all.sh
       - store_test_results:
           path: "*/build/test-results"
