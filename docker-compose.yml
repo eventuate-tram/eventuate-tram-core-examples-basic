@@ -21,7 +21,7 @@ services:
 
 
   mysql:
-    image: eventuateio/eventuate-tram-mysql:0.9.0.RELEASE
+    build: ./mysql
     ports:
       - 3306:3306
     environment:
@@ -48,3 +48,4 @@ services:
       EVENTUATELOCAL_CDC_DB_PASSWORD: rootpassword
       EVENTUATELOCAL_CDC_BINLOG_CLIENT_ID: 1234567890
       EVENTUATELOCAL_CDC_SOURCE_TABLE_NAME: message
+      EVENTUATE_DATABASE_SCHEMA: custom_eventuate_schema
