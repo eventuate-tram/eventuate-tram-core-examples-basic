@@ -6,7 +6,7 @@ set -e
 
 ./gradlew :eventuate-tram-examples-in-memory:cleanTest :eventuate-tram-examples-in-memory:test
 
-docker-compose down -v
+docker-compose down --remove-orphans -v
 
 docker-compose up -d
 
@@ -14,4 +14,4 @@ docker-compose up -d
 
 ./gradlew build
 
-docker-compose down -v
+docker-compose down --remove-orphans -v
