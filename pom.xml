@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <eventuateTramVersion>0.9.0.RELEASE</eventuateTramVersion>
-        <springBootVersion>1.4.5.RELEASE</springBootVersion>
+        <springBootVersion>2.0.4.RELEASE</springBootVersion>
     </properties>
 
     <modules>
@@ -22,11 +22,6 @@
         <module>eventuate-tram-examples-in-memory</module>
         <module>eventuate-tram-examples-jdbc-kafka</module>
     </modules>
-
-    <dependencyManagement>
-        <dependencies>
-        </dependencies>
-    </dependencyManagement>
 
     <build>
         <plugins>
@@ -39,18 +34,14 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>1.2.8.RELEASE</version>
-            </plugin>
         </plugins>
     </build>
 
     <repositories>
         <repository>
-            <id>eventuate</id>
-            <url>https://dl.bintray.com/eventuateio-oss/eventuate-maven-release</url>
+            <id>jcenter</id>
+            <name>jcenter</name>
+            <url>http://jcenter.bintray.com</url>
             <releases>
                 <enabled>true</enabled>
             </releases>

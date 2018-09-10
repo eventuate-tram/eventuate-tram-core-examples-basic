@@ -13,16 +13,11 @@ subprojects {
     repositories {
         mavenCentral()
         jcenter()
-        maven {
-            url  "https://dl.bintray.com/eventuateio-oss/eventuate-maven-release"
-        }
         eventuateMavenRepoUrl.split(',').each { repoUrl -> maven { url repoUrl } }
     }
-
-
 }
 
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.11'
+    gradleVersion = '3.5'
 }
