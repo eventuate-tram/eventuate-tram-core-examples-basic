@@ -4,9 +4,9 @@ set -e
 
 . ./set-env.sh
 
-mvn compile
+./mvnw clean compile
 
-mvn -f eventuate-tram-examples-in-memory/pom.xml install
+./mvnw -am -pl eventuate-tram-examples-in-memory test
 
 docker-compose down -v
 
@@ -14,6 +14,6 @@ docker-compose up -d
 
 ./wait-for-mysql.sh
 
-mvn install
+./mvnw -am  -pl eventuate-tram-examples-jdbc-kafka test
 
 docker-compose down -v

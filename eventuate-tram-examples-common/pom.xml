@@ -9,7 +9,7 @@
     <artifactId>eventuate-tram-examples-common</artifactId>
     <packaging>jar</packaging>
     <name>eventuate-tram-examples-common</name>
-
+    <version>0.1.0-SNAPSHOT</version>
     <dependencies>
         <dependency>
             <groupId>io.eventuate.tram.core</groupId>
