@@ -9,3 +9,91 @@ It consists of the following modules:
 * `eventuate-tram-examples-common` - the examples for basic messaging, domain events and command/async reply
 * `eventuate-tram-examples-in-memory` - runs the examples using in-memory stubs
 * `eventuate-tram-examples-jdbc-kafka` - runs the examples using MySQL and Apache Kafka
+
+== About `eventuate-tram-examples-common`
+
+This module defines the transactional messaging examples:
+
+* Basic messaging
+* Domain events
+* Commands, which implement request/asynchronous response
+
+You can run the examples using the tests in the `eventuate-tram-examples-in-memory` and `eventuate-tram-examples-jdbc-kafka` modules.
+
+
+== About `eventuate-tram-examples-in-memory` - running in-memory examples
+
+This module executes the examples using `eventuate-tram-in-memory` module, which is extremely useful for writing fast running tests.
+
+To run this version of the tests:
+
+```
+./gradlew :eventuate-tram-examples-in-memory:test
+```
+
+== About `eventuate-tram-examples-jdbc-kafka` - running the MySQL and Apache Kafka example
+
+This module executes the examples using MySQL and Apache Kafka.
+
+=== Set DOCKER_HOST_IP environment variable
+
+Before running MySQL and Apache Kafka using Docker Compose, you first need to set the `DOCKER_HOST_IP` environment variable.
+This must be an IP address or resolvable hostname.
+It cannot be `localhost` or `127.0.0.1`.
+Please see this http://eventuate.io/docs/usingdocker.html[guide to setting `DOCKER_HOST_IP`] for more information.
+
+=== Run MySQL and Apache Kafka
+
+Once you have set `DOCKER_HOST_IP` you can then run MySQL and Apache Kafka using Docker Compose.
+
+```
+docker-compose up -d
+```
+
+=== Run the tests
+
+Once the containers have started you can run the tests:
+
+```
+./gradlew :eventuate-tram-examples-jdbc-kafka:test
+```
+
+=== Inspect the database
+
+You can inspect the Eventuate Tram-related database tables:
+
+```
+$ ./mysql-cli.sh -it
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+...
+
+mysql> select * from message\G
+*************************** 1. row ***************************
+         id: 00000168d96469db-acde480011220000
+destination: destination1549835461824
+    headers: {"DESTINATION":"destination1549835461824","ID":"00000168d96469db-acde480011220000"}
+    payload: Hello1549835461824
+  published: 0
+
+...
+mysql> select * from received_messages\G
+*************************** 1. row ***************************
+consumer_id: commandDispatcheId1549835467791
+ message_id: 00000168d9647f65-acde480011220000
+*************************** 2. row ***************************
+...
+mysql> quit
+Bye
+```
+
+=== Clean up
+
+To clean up:
+
+```
+$ docker-compose down -v
+```
+
+== For more information
+
+Please read the http://eventuate.io/tram/gettingstarted.html[Eventuate Tram getting started guide] or look at the http://eventuate.io/exampleapps.html[examples].

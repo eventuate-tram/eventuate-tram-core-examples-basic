@@ -12,6 +12,6 @@ docker-compose up -d
 
 ./wait-for-mysql.sh
 
-./gradlew build
+./gradlew cleanTest build
 
 docker-compose down -v
