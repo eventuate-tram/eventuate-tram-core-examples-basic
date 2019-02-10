@@ -31,7 +31,7 @@ To run this version of the tests:
 ./gradlew :eventuate-tram-examples-in-memory:test
 ```
 
-== About `eventuate-tram-examples-jdbc-kafka` - running the MySQL and Apache Kafka example
+== About `eventuate-tram-examples-jdbc-kafka` - running examples with MySQL and Apache Kafka
 
 This module executes the examples using MySQL and Apache Kafka.
 
