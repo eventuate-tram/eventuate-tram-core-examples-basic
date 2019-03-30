@@ -30,7 +30,7 @@ services:
       - MYSQL_PASSWORD=mysqlpw
 
   cdcservice:
-    image: eventuateio/eventuate-tram-cdc-mysql-service:0.9.0.RELEASE
+    image: eventuateio/eventuate-tram-cdc-mysql-service:0.20.0.RC1
     ports:
       - "8099:8080"
     depends_on:
@@ -49,3 +49,8 @@ services:
       EVENTUATELOCAL_CDC_BINLOG_CLIENT_ID: 1234567890
       EVENTUATELOCAL_CDC_SOURCE_TABLE_NAME: message
       EVENTUATE_DATABASE_SCHEMA: custom_eventuate_schema
+      EVENTUATELOCAL_CDC_MYSQL_BINLOG_CLIENT_UNIQUE_ID: 1
+      EVENTUATELOCAL_CDC_OFFSET_STORAGE_TOPIC_NAME: db.history.eventuate.local
+      EVENTUATELOCAL_CDC_OFFSET_STORE_KEY: MySqlBinLog
+      EVENTUATELOCAL_CDC_READ_OLD_DEBEZIUM_DB_OFFSET_STORAGE_TOPIC: "false"
+      EVENTUATELOCAL_CDC_READER_NAME: Reader1
