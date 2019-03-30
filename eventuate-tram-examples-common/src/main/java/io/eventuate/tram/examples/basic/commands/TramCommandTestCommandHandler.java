@@ -2,10 +2,14 @@ package io.eventuate.tram.examples.basic.commands;
 
 import io.eventuate.tram.commands.consumer.*;
 import io.eventuate.tram.messaging.common.Message;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static io.eventuate.tram.commands.consumer.CommandHandlerReplyBuilder.withSuccess;
 
 public class TramCommandTestCommandHandler {
+
+  private Logger logger = LoggerFactory.getLogger(getClass());
 
   private String commandChannel;
 
@@ -14,8 +18,7 @@ public class TramCommandTestCommandHandler {
   }
 
   public Message doSomething(CommandMessage<DoSomethingCommand> cm, PathVariables pvs) {
-    System.out.println("customerId=" + pvs.getString("customerId"));
-    System.out.println("cm=" + cm);
+    logger.info("cm=" + cm);
     return withSuccess();
 
   }
