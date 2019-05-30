@@ -6,12 +6,15 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: eventuate-tram-core-examples-basic-{{ checksum "build.gradle" }}
+          key: eventuate-tram-core-examples-basic-{{ checksum "gradle.properties" }}
       - run: TERM=dumb ./gradlew testClasses
+      - run: TERM=dumb ./mvnw test-compile
       - save_cache:
           paths:
             - ~/.gradle
-          key: eventuate-tram-core-examples-basic-{{ checksum "build.gradle" }}
-      - run: TERM=dumb ./_build-and-test-all.sh
+            - ~/.m2
+          key: eventuate-tram-core-examples-basic-{{ checksum "gradle.properties" }}
+      - run: TERM=dumb ./build-and-test-all.sh
+      - run: TERM=dumb ./build-and-test-all-maven.sh
       - store_test_results:
           path: "*/build/test-results"
