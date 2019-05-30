@@ -1,14 +1,14 @@
 version: '2'
 services:
   zookeeper:
-    image: eventuateio/eventuateio-local-zookeeper:0.18.0.RELEASE
+    image: eventuateio/eventuateio-local-zookeeper:0.30.2.RELEASE
     ports:
       - 2181:2181
       - 2888:2888
       - 3888:3888
 
   kafka:
-    image: eventuateio/eventuateio-local-kafka:0.18.0.RELEASE
+    image: eventuateio/eventuateio-local-kafka:0.30.2.RELEASE
     ports:
       - 9092:9092
     links:
@@ -28,12 +28,12 @@ services:
       - 61614:61614
 
   rabbitmq:
-    image: test-eventuate-tram-rabbitmq
+    build: ./rabbitmq
     ports:
       - 5672:5672
 
   postgres:
-    image: test-eventuate-tram-postgres
+    image: eventuateio/eventuate-tram-postgres:0.21.0.RELEASE
     ports:
       - 5432:5432
     environment:
@@ -41,7 +41,7 @@ services:
       POSTGRES_PASSWORD: eventuate
 
   cdcservice:
-    image: test-eventuate-tram-cdc-mysql-service
+    image: eventuateio/eventuate-tram-cdc-mysql-service:0.21.2.RELEASE
     links:
       - postgres
       - kafka
@@ -59,6 +59,7 @@ services:
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
       EVENTUATELOCAL_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
       EVENTUATELOCAL_ZOOKEEPER_CONNECTION_STRING: zookeeper:2181
+      EVENTUATELOCAL_CDC_READER_NAME: PostgresWalReader
       SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
-      ACTIVEMQ_URL: tcp://${DOCKER_HOST_IP}:61616
-      RABBITMQ_URL: ${DOCKER_HOST_IP}
+      ACTIVEMQ_URL: tcp://activemq:61616
+      RABBITMQ_URL: rabbitmq

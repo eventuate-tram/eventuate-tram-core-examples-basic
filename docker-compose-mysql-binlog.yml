@@ -1,14 +1,14 @@
 version: '2'
 services:
   zookeeper:
-    image: eventuateio/eventuateio-local-zookeeper:0.18.0.RELEASE
+    image: eventuateio/eventuateio-local-zookeeper:0.30.2.RELEASE
     ports:
       - 2181:2181
       - 2888:2888
       - 3888:3888
 
   kafka:
-    image: eventuateio/eventuateio-local-kafka:0.18.0.RELEASE
+    image: eventuateio/eventuateio-local-kafka:0.30.2.RELEASE
     ports:
       - 9092:9092
     links:
@@ -28,12 +28,12 @@ services:
       - 61614:61614
 
   rabbitmq:
-    image: test-eventuate-tram-rabbitmq
+    build: ./rabbitmq
     ports:
       - 5672:5672
 
   mysql:
-    image: test-eventuate-tram-mysql
+    image: eventuateio/eventuate-tram-mysql:0.21.2.RELEASE
     ports:
       - 3306:3306
     environment:
@@ -42,7 +42,7 @@ services:
       - MYSQL_PASSWORD=mysqlpw
 
   cdcservice:
-    image: test-eventuate-tram-cdc-mysql-service
+    image: eventuateio/eventuate-tram-cdc-mysql-service:0.21.2.RELEASE
     ports:
       - "8099:8080"
     depends_on:
@@ -60,8 +60,10 @@ services:
       EVENTUATELOCAL_ZOOKEEPER_CONNECTION_STRING: zookeeper:2181
       EVENTUATELOCAL_CDC_DB_USER_NAME: root
       EVENTUATELOCAL_CDC_DB_PASSWORD: rootpassword
-      EVENTUATELOCAL_CDC_BINLOG_CLIENT_ID: 1234567890
-      EVENTUATELOCAL_CDC_SOURCE_TABLE_NAME: message
+      EVENTUATELOCAL_CDC_READER_NAME: MySqlReader
+      EVENTUATELOCAL_CDC_OFFSET_STORE_KEY: MySqlBinlog
+      EVENTUATELOCAL_CDC_MYSQL_BINLOG_CLIENT_UNIQUE_ID: 1234567890
+      EVENTUATELOCAL_CDC_READ_OLD_DEBEZIUM_DB_OFFSET_STORAGE_TOPIC: "false"
       SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
-      ACTIVEMQ_URL: tcp://${DOCKER_HOST_IP}:61616
-      RABBITMQ_URL: ${DOCKER_HOST_IP}
+      ACTIVEMQ_URL: tcp://activemq:61616
+      RABBITMQ_URL: rabbitmq
