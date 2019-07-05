@@ -1,19 +1,15 @@
 package io.eventuate.tram.examples.basic.events;
 
-import io.eventuate.tram.events.publisher.TramEventsPublisherConfiguration;
+import io.eventuate.tram.events.spring.publisher.TramEventsPublisherConfiguration;
+import io.eventuate.tram.events.spring.subscriber.TramEventSubscriberConfiguration;
 import io.eventuate.tram.events.subscriber.DomainEventDispatcher;
-import io.eventuate.tram.examples.basic.events.domain.AccountDebited;
-import io.eventuate.tram.messaging.consumer.MessageConsumer;
+import io.eventuate.tram.events.subscriber.DomainEventDispatcherFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
-import java.util.Collections;
-
-import static java.util.Collections.singleton;
-
 @Configuration
-@Import(TramEventsPublisherConfiguration.class)
+@Import({TramEventsPublisherConfiguration.class, TramEventSubscriberConfiguration.class})
 public class AbstractTramEventTestConfiguration {
 
   @Bean
@@ -22,12 +18,10 @@ public class AbstractTramEventTestConfiguration {
   }
 
   @Bean
-  public DomainEventDispatcher domainEventDispatcher(AbstractTramEventTestConfig config,
-                                                     TramEventTestEventConsumer target,
-                                                     MessageConsumer messageConsumer) {
-    return new DomainEventDispatcher("eventDispatcherId" + config.getUniqueId(),
-            target.domainEventHandlers(),
-            messageConsumer);
+  public DomainEventDispatcher domainEventDispatcher(DomainEventDispatcherFactory domainEventDispatcherFactory,
+                                                     AbstractTramEventTestConfig config,
+                                                     TramEventTestEventConsumer target) {
+    return domainEventDispatcherFactory.make("eventDispatcherId" + config.getUniqueId(), target.domainEventHandlers());
   }
 
   @Bean
