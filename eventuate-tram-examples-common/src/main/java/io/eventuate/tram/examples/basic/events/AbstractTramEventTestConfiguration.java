@@ -2,6 +2,8 @@ package io.eventuate.tram.examples.basic.events;
 
 import io.eventuate.tram.events.publisher.TramEventsPublisherConfiguration;
 import io.eventuate.tram.events.subscriber.DomainEventDispatcher;
+import io.eventuate.tram.events.subscriber.DomainEventDispatcherFactory;
+import io.eventuate.tram.events.subscriber.TramEventSubscriberConfiguration;
 import io.eventuate.tram.examples.basic.events.domain.AccountDebited;
 import io.eventuate.tram.messaging.consumer.MessageConsumer;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +15,7 @@ import java.util.Collections;
 import static java.util.Collections.singleton;
 
 @Configuration
-@Import(TramEventsPublisherConfiguration.class)
+@Import({TramEventsPublisherConfiguration.class, TramEventSubscriberConfiguration.class})
 public class AbstractTramEventTestConfiguration {
 
   @Bean
@@ -22,12 +24,12 @@ public class AbstractTramEventTestConfiguration {
   }
 
   @Bean
-  public DomainEventDispatcher domainEventDispatcher(AbstractTramEventTestConfig config,
+  public DomainEventDispatcher domainEventDispatcher(DomainEventDispatcherFactory domainEventDispatcherFactory,
+                                                     AbstractTramEventTestConfig config,
                                                      TramEventTestEventConsumer target,
                                                      MessageConsumer messageConsumer) {
-    return new DomainEventDispatcher("eventDispatcherId" + config.getUniqueId(),
-            target.domainEventHandlers(),
-            messageConsumer);
+    return domainEventDispatcherFactory.make("eventDispatcherId" + config.getUniqueId(),
+            target.domainEventHandlers());
   }
 
   @Bean
