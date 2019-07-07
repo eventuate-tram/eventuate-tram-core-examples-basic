@@ -4,6 +4,7 @@ set -o pipefail
 
 SCRIPTS="
 ./build-and-test-all-mysql-binlog-kafka.sh
+./build-and-test-all-maven.sh
 ./build-and-test-all-mysql-binlog-activemq.sh
 ./build-and-test-all-mysql-binlog-rabbitmq.sh
 ./build-and-test-all-postgres-polling-activemq.sh
