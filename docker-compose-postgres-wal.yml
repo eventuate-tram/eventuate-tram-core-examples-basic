@@ -22,7 +22,7 @@ services:
       - 5672:5672
 
   postgres:
-    image: eventuateio/eventuate-tram-postgres:0.21.0.RELEASE
+    image: eventuateio/eventuate-postgres:0.6.0.RELEASE
     ports:
       - 5432:5432
     environment:
