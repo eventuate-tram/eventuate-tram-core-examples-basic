@@ -18,20 +18,6 @@ services:
       - KAFKA_HEAP_OPTS=-Xmx320m -Xms320m
       - ZOOKEEPER_SERVERS=zookeeper:2181
 
-  activemq:
-    image: webcenter/activemq:5.14.3
-    ports:
-      - 8161:8161
-      - 61616:61616
-      - 61613:61613
-      - 1883:1883
-      - 61614:61614
-
-  rabbitmq:
-    build: ./rabbitmq
-    ports:
-      - 5672:5672
-
   mysql:
     image: eventuateio/eventuate-tram-mysql:0.21.2.RELEASE
     ports:
@@ -48,8 +34,6 @@ services:
     depends_on:
       - mysql
       - kafka
-      - activemq
-      - rabbitmq
       - zookeeper
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql/eventuate
@@ -65,5 +49,3 @@ services:
       EVENTUATELOCAL_CDC_MYSQL_BINLOG_CLIENT_UNIQUE_ID: 1234567890
       EVENTUATELOCAL_CDC_READ_OLD_DEBEZIUM_DB_OFFSET_STORAGE_TOPIC: "false"
       SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
-      ACTIVEMQ_URL: tcp://activemq:61616
-      RABBITMQ_URL: rabbitmq

@@ -13,8 +13,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
-        <eventuateTramVersion>0.10.0.RELEASE</eventuateTramVersion>
-        <springBootVersion>2.0.4.RELEASE</springBootVersion>
+        <eventuateTramVersion>0.23.0.MICRONAUT.M2</eventuateTramVersion>
+        <springBootVersion>2.1.1.RELEASE</springBootVersion>
     </properties>
 
     <modules>
@@ -49,6 +49,13 @@
         <repository>
             <id>central</id>
             <url>https://repo1.maven.org/maven2</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>eventuate-milestones</id>
+            <url>https://dl.bintray.com/eventuateio-oss/eventuate-maven-milestone</url>
             <releases>
                 <enabled>true</enabled>
             </releases>

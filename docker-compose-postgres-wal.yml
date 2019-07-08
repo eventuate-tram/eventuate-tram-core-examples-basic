@@ -6,18 +6,6 @@ services:
       - 2181:2181
       - 2888:2888
       - 3888:3888
-
-  kafka:
-    image: eventuateio/eventuateio-local-kafka:0.30.2.RELEASE
-    ports:
-      - 9092:9092
-    links:
-      - zookeeper
-    environment:
-      - ADVERTISED_HOST_NAME=${DOCKER_HOST_IP}
-      - KAFKA_HEAP_OPTS=-Xmx320m -Xms320m
-      - ZOOKEEPER_SERVERS=zookeeper:2181
-
   activemq:
     image: webcenter/activemq:5.14.3
     ports:
@@ -44,7 +32,6 @@ services:
     image: eventuateio/eventuate-tram-cdc-mysql-service:0.21.2.RELEASE
     links:
       - postgres
-      - kafka
       - activemq
       - rabbitmq
       - zookeeper
@@ -57,7 +44,6 @@ services:
       SPRING_DATASOURCE_TEST_ON_BORROW: "true"
       SPRING_DATASOURCE_VALIDATION_QUERY: SELECT 1
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
-      EVENTUATELOCAL_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
       EVENTUATELOCAL_ZOOKEEPER_CONNECTION_STRING: zookeeper:2181
       EVENTUATELOCAL_CDC_READER_NAME: PostgresWalReader
       SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}

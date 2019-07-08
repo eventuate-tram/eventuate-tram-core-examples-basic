@@ -2,10 +2,10 @@
 
 set -e
 
-export DATABASE=postgres
+export DATABASE=mssql
 export MODE=polling
 export BROKER=kafka
 
-. ./set-env-postgres-polling.sh
+. ./set-env-mssql-polling.sh
 
 ./_build-and-test-all.sh

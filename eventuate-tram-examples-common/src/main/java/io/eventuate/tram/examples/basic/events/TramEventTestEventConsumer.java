@@ -1,7 +1,6 @@
 package io.eventuate.tram.examples.basic.events;
 
 import io.eventuate.tram.events.subscriber.DomainEventEnvelope;
-import io.eventuate.tram.events.subscriber.DomainEventHandler;
 import io.eventuate.tram.events.subscriber.DomainEventHandlers;
 import io.eventuate.tram.events.subscriber.DomainEventHandlersBuilder;
 import io.eventuate.tram.examples.basic.events.domain.AccountDebited;
