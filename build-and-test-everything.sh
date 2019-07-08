@@ -2,7 +2,10 @@
 
 set -o pipefail
 
-SCRIPTS="./build-and-test-all-mysql-binlog-kafka.sh ./build-and-test-all-mssql-polling-kafka.sh ./build-and-test-all-postgres-wal-activemq.sh ./build-and-test-all-postgres-wal-rabbitmq.sh"
+SCRIPTS="./build-and-test-all-mysql-binlog-kafka.sh
+         ./build-and-test-all-mssql-polling-kafka.sh
+         ./build-and-test-all-postgres-wal-activemq.sh
+         ./build-and-test-all-postgres-wal-rabbitmq.sh"
 
 
 date > build-and-test-everything.log

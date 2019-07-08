@@ -21,7 +21,8 @@ public class AbstractTramEventTestConfiguration {
   public DomainEventDispatcher domainEventDispatcher(DomainEventDispatcherFactory domainEventDispatcherFactory,
                                                      AbstractTramEventTestConfig config,
                                                      TramEventTestEventConsumer target) {
-    return domainEventDispatcherFactory.make("eventDispatcherId" + config.getUniqueId(), target.domainEventHandlers());
+    return domainEventDispatcherFactory.make("eventDispatcherId" + config.getUniqueId(),
+            target.domainEventHandlers());
   }
 
   @Bean
