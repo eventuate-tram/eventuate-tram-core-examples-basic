@@ -2,7 +2,7 @@
 
 set -e
 
-. ./set-env-mysql-binlog.sh
+. ./set-env-mysql-binlog-kafka.sh
 
 ./mvnw clean compile
 
