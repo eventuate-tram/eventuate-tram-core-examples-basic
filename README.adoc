@@ -47,8 +47,14 @@ Please see this http://eventuate.io/docs/usingdocker.html[guide to setting `DOCK
 Once you have set `DOCKER_HOST_IP` you can then run MySQL and Apache Kafka using Docker Compose.
 
 ```
-docker-compose up -d
+gradlew <database><mode>ComposeBuild
+gradlew <database><mode>ComposeUp
 ```
+where <database><mode> one of
+
+* mysqlbinlog
+* postgrespolling
+* postgreswal
 
 === Run the tests
 
@@ -91,7 +97,7 @@ Bye
 To clean up:
 
 ```
-$ docker-compose down -v
+./gradlew <database><mode>ComposeDown
 ```
 
 == For more information

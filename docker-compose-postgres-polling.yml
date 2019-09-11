@@ -1,14 +1,12 @@
 version: '2'
 services:
   zookeeper:
-    image: eventuateio/eventuate-zookeeper:0.8.0.RELEASE
+    image: eventuateio/eventuate-zookeeper:$EVENTUATE_COMMON_VERSION
     ports:
       - 2181:2181
-      - 2888:2888
-      - 3888:3888
 
   kafka:
-    image: eventuateio/eventuate-kafka:0.3.0.RELEASE
+    image: eventuateio/eventuate-kafka:$EVENTUATE_KAFKA_VERSION
     ports:
       - 9092:9092
     links:
@@ -33,7 +31,7 @@ services:
       - 5672:5672
 
   postgres:
-    image: eventuateio/eventuate-postgres:0.8.0.RELEASE
+    image: eventuateio/eventuate-postgres:$EVENTUATE_COMMON_VERSION
     ports:
       - 5432:5432
     environment:
@@ -41,7 +39,7 @@ services:
       POSTGRES_PASSWORD: eventuate
 
   cdcservice:
-    image: eventuateio/eventuate-cdc-service:0.5.0.RELEASE
+    image: eventuateio/eventuate-cdc-service:$EVENTUATE_CDC_VERSION
     links:
       - postgres
       - kafka
