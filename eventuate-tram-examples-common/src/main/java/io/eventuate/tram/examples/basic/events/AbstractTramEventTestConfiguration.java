@@ -1,9 +1,9 @@
 package io.eventuate.tram.examples.basic.events;
 
-import io.eventuate.tram.events.publisher.TramEventsPublisherConfiguration;
+import io.eventuate.tram.spring.events.publisher.TramEventsPublisherConfiguration;
 import io.eventuate.tram.events.subscriber.DomainEventDispatcher;
 import io.eventuate.tram.events.subscriber.DomainEventDispatcherFactory;
-import io.eventuate.tram.events.subscriber.TramEventSubscriberConfiguration;
+import io.eventuate.tram.spring.events.subscriber.TramEventSubscriberConfiguration;
 import io.eventuate.tram.examples.basic.events.domain.AccountDebited;
 import io.eventuate.tram.messaging.consumer.MessageConsumer;
 import org.springframework.context.annotation.Bean;

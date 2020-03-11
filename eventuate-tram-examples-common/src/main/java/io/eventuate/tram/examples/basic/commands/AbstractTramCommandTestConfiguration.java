@@ -2,8 +2,8 @@ package io.eventuate.tram.examples.basic.commands;
 
 import io.eventuate.tram.commands.consumer.CommandDispatcher;
 import io.eventuate.tram.commands.consumer.CommandDispatcherFactory;
-import io.eventuate.tram.commands.consumer.TramCommandConsumerConfiguration;
-import io.eventuate.tram.commands.producer.TramCommandProducerConfiguration;
+import io.eventuate.tram.spring.commands.consumer.TramCommandConsumerConfiguration;
+import io.eventuate.tram.spring.commands.producer.TramCommandProducerConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;

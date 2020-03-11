@@ -1,6 +1,6 @@
 dependencies {
 
-    testCompile "io.eventuate.tram.core:eventuate-tram-jdbc-kafka:$eventuateTramVersion"
+    testCompile "io.eventuate.tram.core:eventuate-tram-spring-jdbc-kafka:$eventuateTramVersion"
 
     testCompile project(":eventuate-tram-examples-common")
     testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
