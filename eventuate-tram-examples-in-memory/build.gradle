@@ -1,6 +1,6 @@
 dependencies {
 
-    testCompile "io.eventuate.tram.core:eventuate-tram-in-memory:$eventuateTramVersion"
+    testCompile "io.eventuate.tram.core:eventuate-tram-spring-in-memory:$eventuateTramVersion"
 
     testCompile project(":eventuate-tram-examples-common")
     testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
