@@ -13,17 +13,17 @@
     <dependencies>
         <dependency>
             <groupId>io.eventuate.tram.core</groupId>
-            <artifactId>eventuate-tram-messaging</artifactId>
+            <artifactId>eventuate-tram-spring-messaging</artifactId>
             <version>${eventuateTramVersion} </version>
         </dependency>
         <dependency>
             <groupId>io.eventuate.tram.core</groupId>
-            <artifactId>eventuate-tram-commands</artifactId>
+            <artifactId>eventuate-tram-spring-commands</artifactId>
             <version>${eventuateTramVersion} </version>
         </dependency>
         <dependency>
             <groupId>io.eventuate.tram.core</groupId>
-            <artifactId>eventuate-tram-events</artifactId>
+            <artifactId>eventuate-tram-spring-events</artifactId>
             <version>${eventuateTramVersion} </version>
         </dependency>
         <dependency>
