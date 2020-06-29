@@ -4,9 +4,8 @@ set -e
 
 . ./set-env-mysql-binlog.sh
 
-export EVENTUATE_COMMON_VERSION="0.8.0.RELEASE"
-export EVENTUATE_KAFKA_VERSION="0.3.0.RELEASE"
-export EVENTUATE_CDC_VERSION="0.5.0.RELEASE"
+export EVENTUATE_COMMON_VERSION="0.10.0.RELEASE"
+export EVENTUATE_CDC_VERSION="0.7.0.RELEASE"
 
 ./mvnw clean compile
 
