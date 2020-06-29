@@ -15,7 +15,7 @@ docker-compose -f docker-compose-mysql-binlog.yml down -v
 
 docker-compose -f docker-compose-mysql-binlog.yml up -d
 
-./wait-for-mysql.sh
+./wait-for-services.sh localhost 8099
 
 ./mvnw -am  -pl eventuate-tram-examples-jdbc-kafka test
 
