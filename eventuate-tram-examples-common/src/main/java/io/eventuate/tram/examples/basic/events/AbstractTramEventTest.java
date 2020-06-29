@@ -25,7 +25,7 @@ public abstract class AbstractTramEventTest {
 
   @Test
   public void shouldReceiveEvent() throws InterruptedException {
-    long uniqueId = config.getUniqueId();
+    long uniqueId = config.get();
 
     DomainEvent domainEvent = new AccountDebited(uniqueId);
 

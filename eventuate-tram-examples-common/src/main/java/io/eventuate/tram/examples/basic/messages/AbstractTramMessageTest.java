@@ -21,7 +21,7 @@ public abstract class AbstractTramMessageTest {
 
   private String subscriberId = "subscriberId" + uniqueId;
   private String destination = "destination" + uniqueId;
-  private String payload = "Hello" + uniqueId;
+  private String payload = "{" + "\"Hello\":" + uniqueId + "}";
 
   @Autowired
   private MessageProducer messageProducer;

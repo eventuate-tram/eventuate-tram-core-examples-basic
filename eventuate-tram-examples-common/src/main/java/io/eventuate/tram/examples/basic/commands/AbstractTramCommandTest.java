@@ -48,7 +48,7 @@ public abstract class AbstractTramCommandTest {
 
   private String sendCommand() {
     return commandProducer.send(config.getCommandChannel(),
-              new DoSomethingCommand(),
+              new ReserveCreditCommand(),
               config.getReplyChannel(),
               Collections.emptyMap());
   }
