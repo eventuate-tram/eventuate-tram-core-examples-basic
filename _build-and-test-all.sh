@@ -11,8 +11,6 @@ ${dockerall}Down
 ${dockerall}Build
 ${dockerdb}Up
 
-./wait-for-${DATABASE}.sh
-
 ${dockerall}Up
 
 ./gradlew :eventuate-tram-examples-jdbc-${BROKER}:cleanTest :eventuate-tram-examples-jdbc-${BROKER}:test
