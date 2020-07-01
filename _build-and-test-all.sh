@@ -2,8 +2,9 @@
 
 set -e
 
-dockerdb="./gradlew ${DATABASE}${MODE}dbCompose"
-dockerall="./gradlew ${DATABASE}${MODE}Compose"
+export SPRING_PROFILES_ACTIVE=${DATABASE?}
+
+dockerall="./gradlew ${DATABASE}${MODE}${BROKER}Compose"
 
 ./gradlew testClasses :eventuate-tram-examples-in-memory:cleanTest :eventuate-tram-examples-in-memory:test
 

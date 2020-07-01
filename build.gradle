@@ -43,36 +43,57 @@ dockerCompose {
     removeOrphans = true
     dockerComposeStopTimeout = Duration.ofSeconds(1)
 
-    mysqlbinlog {
+    mysqlbinlogkafka {
         projectName = null
         useComposeFiles = ["docker-compose-mysql-binlog.yml"]
     }
 
-    mysqlbinlogdb {
+    mysqlbinlogactivemq {
         projectName = null
         useComposeFiles = ["docker-compose-mysql-binlog.yml"]
-        startedServices = ["mysql"]
+        environment.put "SPRING_PROFILES_ACTIVE", "ActiveMQ"
     }
 
-    postgrespolling {
+    mysqlbinlograbbitmq {
+        projectName = null
+        useComposeFiles = ["docker-compose-mysql-binlog.yml"]
+        environment.put "SPRING_PROFILES_ACTIVE", "RabbitMQ"
+    }
+
+    postgrespollingkafka {
         projectName = null
         useComposeFiles = ["docker-compose-postgres-polling.yml"]
+        environment.put "SPRING_PROFILES_ACTIVE", "EventuatePolling,Postgres"
     }
 
-    postgrespollingdb {
+    postgrespollingactivemq {
         projectName = null
         useComposeFiles = ["docker-compose-postgres-polling.yml"]
-        startedServices = ["postgres"]
+        environment.put "SPRING_PROFILES_ACTIVE", "EventuatePolling,Postgres,ActiveMQ"
     }
 
-    postgreswal {
+    postgrespollingrabbitmq {
         projectName = null
-        useComposeFiles = ["docker-compose-postgres-wal.yml"]
+        useComposeFiles = ["docker-compose-postgres-polling.yml"]
+        environment.put "SPRING_PROFILES_ACTIVE", "EventuatePolling,RabbitMQ,Postgres"
     }
 
-    postgreswaldb {
+    postgreswalkafka {
         projectName = null
         useComposeFiles = ["docker-compose-postgres-wal.yml"]
-        startedServices = ["postgres"]
+        environment.put "SPRING_PROFILES_ACTIVE", "PostgresWal,Postgres"
     }
+
+    postgreswalactivemq {
+        projectName = null
+        useComposeFiles = ["docker-compose-postgres-wal.yml"]
+        environment.put "SPRING_PROFILES_ACTIVE", "PostgresWal,ActiveMQ,Postgres"
+    }
+
+    postgreswalrabbitmq {
+        projectName = null
+        useComposeFiles = ["docker-compose-postgres-wal.yml"]
+        environment.put "SPRING_PROFILES_ACTIVE", "PostgresWal,RabbitMQ,Postgres"
+    }
+
 }
