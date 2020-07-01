@@ -20,6 +20,7 @@
     <modules>
         <module>eventuate-tram-examples-common</module>
         <module>eventuate-tram-examples-in-memory</module>
+        <module>eventuate-tram-examples-jdbc-common</module>
         <module>eventuate-tram-examples-jdbc-kafka</module>
     </modules>
 
