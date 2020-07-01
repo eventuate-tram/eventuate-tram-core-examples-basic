@@ -18,6 +18,12 @@ eventuatelocal:
     connection:
       string: ${DOCKER_HOST_IP:localhost}:2181
 
+activemq:
+  url: tcp://${DOCKER_HOST_IP:localhost}:61616
+
+rabbitmq:
+  url: ${DOCKER_HOST_IP:localhost}
+
 ---
 spring:
   profiles: Postgres

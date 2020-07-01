@@ -2,8 +2,6 @@
 
 set -e
 
-. ./set-env-mysql-binlog.sh
-
 export EVENTUATE_COMMON_VERSION="0.10.0.RELEASE"
 export EVENTUATE_CDC_VERSION="0.7.0.RELEASE"
 

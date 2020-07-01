@@ -1,3 +1,5 @@
+import java.time.Duration
+
 buildscript {
     repositories {
         jcenter()
@@ -39,6 +41,7 @@ dockerCompose {
     environment.put "EVENTUATE_CDC_VERSION", eventuateCdcImageVersion
 
     removeOrphans = true
+    dockerComposeStopTimeout = Duration.ofSeconds(1)
 
     mysqlbinlog {
         projectName = null
