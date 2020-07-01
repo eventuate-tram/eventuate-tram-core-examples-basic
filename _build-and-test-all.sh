@@ -9,7 +9,6 @@ dockerall="./gradlew ${DATABASE}${MODE}Compose"
 
 ${dockerall}Down
 ${dockerall}Build
-${dockerdb}Up
 
 ${dockerall}Up
 
