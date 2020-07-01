@@ -7,24 +7,26 @@ import static io.eventuate.tram.commands.consumer.CommandHandlerReplyBuilder.wit
 
 public class TramCommandTestCommandHandler {
 
-  private String commandChannel;
+  public CommandHandlers getCommandHandlers() {
+    return CommandHandlersBuilder
+            .fromChannel(commandChannel)
+            .onMessage(ReserveCreditCommand.class, this::reserveCredit)
+            .build();
 
-  public TramCommandTestCommandHandler(String commandChannel) {
-   this.commandChannel = commandChannel;
   }
+  public Message reserveCredit(CommandMessage<ReserveCreditCommand> cm) {
 
-  public Message doSomething(CommandMessage<DoSomethingCommand> cm, PathVariables pvs) {
-    System.out.println("customerId=" + pvs.getString("customerId"));
+    System.out.println("customerId=" + cm.getCommand().getCustomerId());
     System.out.println("cm=" + cm);
     return withSuccess();
 
   }
 
-  public CommandHandlers getCommandHandlers() {
-    return CommandHandlersBuilder
-            .fromChannel(commandChannel)
-            .onMessage(DoSomethingCommand.class, this::doSomething)
-            .build();
+  private String commandChannel;
 
+  public TramCommandTestCommandHandler(String commandChannel) {
+    this.commandChannel = commandChannel;
   }
+
+
 }

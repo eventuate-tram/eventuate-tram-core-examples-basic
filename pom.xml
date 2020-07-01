@@ -13,13 +13,14 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
-        <eventuateTramVersion>0.24.0.RC4</eventuateTramVersion>
+        <eventuateTramVersion>0.25.1.RELEASE</eventuateTramVersion>
         <springBootVersion>2.1.1.RELEASE</springBootVersion>
     </properties>
 
     <modules>
         <module>eventuate-tram-examples-common</module>
         <module>eventuate-tram-examples-in-memory</module>
+        <module>eventuate-tram-examples-jdbc-common</module>
         <module>eventuate-tram-examples-jdbc-kafka</module>
     </modules>
 
