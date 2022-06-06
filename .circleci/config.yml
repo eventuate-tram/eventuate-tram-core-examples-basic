@@ -1,22 +1,21 @@
-version: 2
+version: 2.1
+setup: true
+orbs:
+  eventuate-gradle-build-and-test: "eventuate_io/eventuate-gradle-build-and-test@0.1.0"
+  continuation: circleci/continuation@0.1.2
 jobs:
-  build:
-    machine: true
-    working_directory: ~/eventuate-tram-core-examples-basic
+  setup:
+    executor: continuation/default
     steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - eventuate-tram-core-examples-basic-{{ checksum "gradle.properties" }}
-            - eventuate-tram-core-examples-basic-
-      - run: TERM=dumb ./gradlew testClasses
-      - run: TERM=dumb ./mvnw test-compile
-      - save_cache:
-          paths:
-            - ~/.gradle
-            - ~/.m2
-          key: eventuate-tram-core-examples-basic-{{ checksum "gradle.properties" }}
-      - run: TERM=dumb ./build-and-test-all-mysql-binlog-kafka.sh
-      - run: TERM=dumb ./build-and-test-all-maven.sh
-      - store_test_results:
-          path: "*/build/test-results"
+      - checkout # checkout code
+      - run: # run a command
+          name: Generate config
+          command: |
+            ./.circleci/generate-config.sh > generated_config.yml
+      - continuation/continue:
+          configuration_path: generated_config.yml
+
+workflows:
+  setup:
+    jobs:
+      - setup

@@ -6,3 +6,4 @@ build/
 out
 */target
 target
+generated_config.yml
