@@ -6,7 +6,3 @@ dependencies {
     testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
 
 }
-
-test {
-    forkEvery 1
-}
