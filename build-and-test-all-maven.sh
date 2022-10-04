@@ -2,8 +2,15 @@
 
 set -e
 
-export EVENTUATE_COMMON_VERSION="0.10.0.RELEASE"
-export EVENTUATE_CDC_VERSION="0.7.0.RELEASE"
+property_value() {
+  property=${1?}
+  sed -e "/^$property=/!d" -e "s/$property=//" < gradle.properties
+}
+
+export EVENTUATE_COMMON_VERSION=$(property_value eventuateCommonImageVersion)
+export EVENTUATE_MESSAGING_KAFKA_IMAGE_VERSION=$(property_value eventuateMessagingKafkaImageVersion)
+export EVENTUATE_CDC_VERSION=$(property_value eventuateCdcImageVersion)
+
 
 ./mvnw clean compile
 
