@@ -9,7 +9,7 @@ dependencies {
     testImplementation project(":eventuate-tram-examples-common")
     testImplementation "org.springframework.boot:spring-boot-starter-test"
 
-    if (messageBroker == 'kafa') {
+    if (messageBroker == 'kafka') {
         testImplementation "io.eventuate.tram.core:eventuate-tram-spring-jdbc-$messageBroker"
     } else {
         testImplementation "io.eventuate.tram.core:eventuate-tram-jdbc-$messageBroker"
