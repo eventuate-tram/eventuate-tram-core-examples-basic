@@ -13,17 +13,17 @@
     <dependencies>
         <dependency>
             <groupId>io.eventuate.tram.core</groupId>
-            <artifactId>eventuate-tram-spring-messaging</artifactId>
+            <artifactId>eventuate-tram-spring-messaging-starter</artifactId>
             <version>${eventuateTramVersion} </version>
         </dependency>
         <dependency>
             <groupId>io.eventuate.tram.core</groupId>
-            <artifactId>eventuate-tram-spring-commands</artifactId>
+            <artifactId>eventuate-tram-spring-commands-starter</artifactId>
             <version>${eventuateTramVersion} </version>
         </dependency>
         <dependency>
             <groupId>io.eventuate.tram.core</groupId>
-            <artifactId>eventuate-tram-spring-events</artifactId>
+            <artifactId>eventuate-tram-spring-events-starter</artifactId>
             <version>${eventuateTramVersion} </version>
         </dependency>
         <dependency>
@@ -37,6 +37,25 @@
             <version>4.12</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.eventuate.tram.core</groupId>
+            <artifactId>eventuate-tram-spring-jdbc-kafka</artifactId>
+            <version>${eventuateTramVersion}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.eventuate.tram.core</groupId>
+            <artifactId>eventuate-tram-spring-in-memory</artifactId>
+            <version>${eventuateTramVersion}</version>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
 
@@ -50,6 +69,20 @@
                     <target>${java.version}</target>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.3</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.surefire</groupId>
+                        <artifactId>surefire-junit47</artifactId>
+                        <version>3.2.3</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
         </plugins>
     </build>
 </project>

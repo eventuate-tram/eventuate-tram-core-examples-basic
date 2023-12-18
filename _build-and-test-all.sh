@@ -6,13 +6,13 @@ export SPRING_PROFILES_ACTIVE=${DATABASE?}
 
 dockerall="./gradlew ${DATABASE}${MODE}${BROKER}Compose"
 
-./gradlew testClasses :eventuate-tram-examples-in-memory:cleanTest :eventuate-tram-examples-in-memory:test
+./gradlew testClasses
 
 ${dockerall}Down
 ${dockerall}Build
 
 ${dockerall}Up
 
-./gradlew :eventuate-tram-examples-jdbc-${BROKER}:cleanTest :eventuate-tram-examples-jdbc-${BROKER}:test
+./gradlew build -P messageBroker=$BROKER
 
 ${dockerall}Down

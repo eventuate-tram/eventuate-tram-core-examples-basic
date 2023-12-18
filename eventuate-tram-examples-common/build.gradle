@@ -4,6 +4,11 @@ dependencies {
 
     implementation "org.springframework.boot:spring-boot-starter"
 
-    api "junit:junit:4.12"
+    testImplementation "junit:junit:4.12"
+
+    testImplementation project(":eventuate-tram-examples-common")
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "io.eventuate.tram.core:eventuate-tram-spring-jdbc-$messageBroker"
+    testImplementation "io.eventuate.tram.core:eventuate-tram-spring-in-memory"
 
 }
