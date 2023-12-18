@@ -4,7 +4,7 @@ dependencies {
 
     implementation "org.springframework.boot:spring-boot-starter"
 
-    testImplementation "junit:junit:4.12"
+    implementation "junit:junit:4.12"
 
     testImplementation project(":eventuate-tram-examples-common")
     testImplementation "org.springframework.boot:spring-boot-starter-test"
