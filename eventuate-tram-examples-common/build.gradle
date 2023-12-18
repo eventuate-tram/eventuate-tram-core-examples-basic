@@ -1,10 +1,9 @@
 dependencies {
-    compile "io.eventuate.tram.core:eventuate-tram-spring-messaging:$eventuateTramVersion"
-    compile "io.eventuate.tram.core:eventuate-tram-spring-commands:$eventuateTramVersion"
-    compile "io.eventuate.tram.core:eventuate-tram-spring-events:$eventuateTramVersion"
+    implementation "io.eventuate.tram.core:eventuate-tram-spring-commands-starter"
+    implementation "io.eventuate.tram.core:eventuate-tram-spring-events-starter"
 
-    compile "org.springframework.boot:spring-boot-starter:$springBootVersion"
+    implementation "org.springframework.boot:spring-boot-starter"
 
-    compile "junit:junit:4.12"
+    api "junit:junit:4.12"
 
 }

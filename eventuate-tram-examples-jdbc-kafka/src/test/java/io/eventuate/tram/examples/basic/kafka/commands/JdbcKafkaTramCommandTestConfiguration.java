@@ -8,6 +8,6 @@ import org.springframework.context.annotation.Import;
 
 @Configuration
 @EnableAutoConfiguration
-@Import({AbstractTramCommandTestConfiguration.class, TramJdbcKafkaConfiguration.class, })
+@Import({AbstractTramCommandTestConfiguration.class, })
 public class JdbcKafkaTramCommandTestConfiguration {
 }

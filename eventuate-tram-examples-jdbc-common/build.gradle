@@ -1,7 +1,7 @@
 dependencies {
 
-    compile project(":eventuate-tram-examples-common")
-    compile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
+    api project(":eventuate-tram-examples-common")
+    api "org.springframework.boot:spring-boot-starter-test"
 
 }
 

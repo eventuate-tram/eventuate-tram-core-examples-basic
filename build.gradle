@@ -2,7 +2,6 @@ import java.time.Duration
 
 buildscript {
     repositories {
-        jcenter()
         mavenCentral()
     }
     dependencies {
@@ -11,24 +10,22 @@ buildscript {
     }
 }
 
-allprojects {
-    group = "io.eventuate.tram.examples.basic"
-}
-
 subprojects {
-    apply plugin: 'java'
-    apply plugin: 'maven'
+    apply plugin: "java-library"
 
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
+    sourceCompatibility = 17
+    targetCompatibility = 17
 
     repositories {
         mavenCentral()
-        jcenter()
         eventuateMavenRepoUrl.split(',').each { repoUrl -> maven { url repoUrl } }
     }
+    
+    dependencies {
+        implementation(platform("io.eventuate.platform:eventuate-platform-dependencies:$eventuatePlatformVersion"))
+        implementation(platform("org.springframework.boot:spring-boot-dependencies:$springBootVersion"))
+    }
 }
-
 
 
 apply plugin: 'docker-compose'
