@@ -24,7 +24,9 @@
     </properties>
 
     <modules>
-        <module>eventuate-tram-examples-common</module>
+        <module>eventuate-tram-examples-basic-messaging</module>
+        <module>eventuate-tram-examples-basic-events</module>
+        <module>eventuate-tram-examples-basic-commands</module>
     </modules>
 
     <build>

@@ -1,1 +1,4 @@
-include 'eventuate-tram-examples-common'
+include 'eventuate-tram-examples-basic-messaging'
+include 'eventuate-tram-examples-basic-events'
+include 'eventuate-tram-examples-basic-commands'
+

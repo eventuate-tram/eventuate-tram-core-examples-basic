@@ -1,0 +1,19 @@
+dependencies {
+    implementation "io.eventuate.tram.core:eventuate-tram-spring-messaging-starter"
+    implementation "io.eventuate.tram.core:eventuate-tram-spring-messaging"
+
+    implementation "org.springframework.boot:spring-boot-starter"
+
+    implementation "junit:junit:4.12"
+
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+
+    if (messageBroker == 'kafka') {
+        testImplementation "io.eventuate.tram.core:eventuate-tram-spring-jdbc-$messageBroker"
+    } else {
+        testImplementation "io.eventuate.tram.core:eventuate-tram-jdbc-$messageBroker"
+    }
+
+    testImplementation "io.eventuate.tram.core:eventuate-tram-spring-in-memory"
+
+}
