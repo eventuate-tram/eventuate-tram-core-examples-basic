@@ -1,7 +1,0 @@
-dependencies {
-
-    api project(":eventuate-tram-examples-common")
-    api "org.springframework.boot:spring-boot-starter-test"
-
-}
-

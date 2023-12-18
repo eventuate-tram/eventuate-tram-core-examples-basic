@@ -11,12 +11,19 @@
     <name>eventuate-tram-examples-jdbc-kafka</name>
 
     <dependencies>
+
         <dependency>
             <groupId>io.eventuate.tram.examples.basic</groupId>
-            <artifactId>eventuate-tram-examples-jdbc-common</artifactId>
+            <artifactId>eventuate-tram-examples-common</artifactId>
             <version>0.1.0-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>io.eventuate.tram.core</groupId>
             <artifactId>eventuate-tram-spring-jdbc-kafka</artifactId>

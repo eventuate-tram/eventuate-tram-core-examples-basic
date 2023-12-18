@@ -1,5 +1,4 @@
 include 'eventuate-tram-examples-common'
-include 'eventuate-tram-examples-jdbc-common'
 include 'eventuate-tram-examples-jdbc-kafka'
 include 'eventuate-tram-examples-jdbc-rabbitmq'
 include 'eventuate-tram-examples-jdbc-activemq'

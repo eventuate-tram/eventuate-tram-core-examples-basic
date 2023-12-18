@@ -1,5 +1,6 @@
 dependencies {
-    testImplementation project(":eventuate-tram-examples-jdbc-common")
+    testImplementation project(":eventuate-tram-examples-common")
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "io.eventuate.tram.core:eventuate-tram-jdbc-activemq"
 }
 
