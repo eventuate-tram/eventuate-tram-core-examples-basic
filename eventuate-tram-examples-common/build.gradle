@@ -8,7 +8,13 @@ dependencies {
 
     testImplementation project(":eventuate-tram-examples-common")
     testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "io.eventuate.tram.core:eventuate-tram-spring-jdbc-$messageBroker"
+
+    if (messageBroker == 'kafa') {
+        testImplementation "io.eventuate.tram.core:eventuate-tram-spring-jdbc-$messageBroker"
+    } else {
+        testImplementation "io.eventuate.tram.core:eventuate-tram-jdbc-$messageBroker"
+    }
+
     testImplementation "io.eventuate.tram.core:eventuate-tram-spring-in-memory"
 
 }
