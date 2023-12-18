@@ -14,13 +14,11 @@
         <dependency>
             <groupId>io.eventuate.tram.core</groupId>
             <artifactId>eventuate-tram-spring-messaging-starter</artifactId>
-            <version>${eventuateTramVersion} </version>
         </dependency>
 
         <dependency>
             <groupId>io.eventuate.tram.core</groupId>
             <artifactId>eventuate-tram-spring-messaging</artifactId>
-            <version>${eventuateTramVersion} </version>
         </dependency>
 
         <dependency>
@@ -43,14 +41,12 @@
         <dependency>
             <groupId>io.eventuate.tram.core</groupId>
             <artifactId>eventuate-tram-spring-jdbc-kafka</artifactId>
-            <version>${eventuateTramVersion}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>io.eventuate.tram.core</groupId>
             <artifactId>eventuate-tram-spring-in-memory</artifactId>
-            <version>${eventuateTramVersion}</version>
             <scope>test</scope>
         </dependency>
 
