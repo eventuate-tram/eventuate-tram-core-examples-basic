@@ -1,0 +1,25 @@
+apply plugin: 'org.springframework.boot'
+
+dependencies {
+    implementation "io.eventuate.tram.core:eventuate-tram-spring-events-publisher-starter"
+    implementation "io.eventuate.tram.core:eventuate-tram-messaging"
+
+    implementation "org.springframework.boot:spring-boot-starter-web"
+
+    if (messageBroker == 'kafka') {
+        implementation "io.eventuate.tram.core:eventuate-tram-spring-jdbc-$messageBroker"
+    } else {
+        implementation "io.eventuate.tram.core:eventuate-tram-jdbc-$messageBroker"
+    }
+
+    testImplementation "io.eventuate.tram.core:eventuate-tram-spring-testing-support-messaging:$eventuateTramVersion" // FIXMEπ
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "io.eventuate.util:eventuate-util-test"
+    testImplementation "io.eventuate.tram.core:eventuate-tram-spring-in-memory"
+    testImplementation "io.rest-assured:spring-mock-mvc"
+
+}
+
+test {
+    useJUnitPlatform()
+}
