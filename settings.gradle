@@ -1,6 +1,8 @@
 include 'eventuate-tram-examples-basic-messaging'
 include 'eventuate-tram-examples-basic-event-publisher'
 include 'eventuate-tram-examples-basic-event-subscriber'
-include 'eventuate-tram-examples-basic-commands'
+include 'eventuate-tram-examples-basic-command-common'
+include 'eventuate-tram-examples-basic-command-producer'
+include 'eventuate-tram-examples-basic-command-consumer'
 include 'eventuate-tram-spring-testing-support-consumer'
 

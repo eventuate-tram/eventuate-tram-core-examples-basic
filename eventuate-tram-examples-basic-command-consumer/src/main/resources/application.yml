@@ -1,7 +1,9 @@
 logging:
   level:
     io:
-      eventuate: INFO
+      eventuate: DEBUG
+
+server.port: 8081
 
 spring:
   datasource:

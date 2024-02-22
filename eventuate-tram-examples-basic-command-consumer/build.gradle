@@ -1,0 +1,35 @@
+dependencies {
+    implementation project(":eventuate-tram-examples-basic-command-common")
+
+    implementation "io.eventuate.tram.core:eventuate-tram-spring-commands-starter"
+    implementation "io.eventuate.tram.core:eventuate-tram-spring-messaging-starter"
+
+    if (messageBroker == 'kafka') {
+        implementation "io.eventuate.tram.core:eventuate-tram-spring-jdbc-$messageBroker"
+    } else {
+        implementation "io.eventuate.tram.core:eventuate-tram-jdbc-$messageBroker"
+    }
+
+
+    implementation "org.springframework.boot:spring-boot-starter-web"
+
+    implementation "junit:junit:4.12"
+
+    testImplementation project(":eventuate-tram-examples-basic-command-producer")
+
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "io.eventuate.tram.core:eventuate-tram-spring-testing-support-outbox-commands:$eventuateTramVersion" // FIXME
+    testImplementation "io.eventuate.tram.core:eventuate-tram-spring-testing-support-messaging:$eventuateTramVersion" // FIXME
+
+
+    testImplementation "io.eventuate.util:eventuate-util-test"
+    testImplementation "io.eventuate.tram.core:eventuate-tram-spring-in-memory"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "io.rest-assured:spring-mock-mvc"
+
+}
+
+test {
+    useJUnitPlatform()
+}
+

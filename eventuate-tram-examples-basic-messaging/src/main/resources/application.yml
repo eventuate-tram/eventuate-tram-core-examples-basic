@@ -8,7 +8,7 @@ spring:
     url: jdbc:mysql://${DOCKER_HOST_IP:localhost}/eventuate
     username: mysqluser
     password: mysqlpw
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
 eventuatelocal:
   kafka:
