@@ -1,13 +1,9 @@
 package io.eventuate.tram.examples.basic.commands.broker;
 
-import io.eventuate.common.json.mapper.JSonMapper;
-import io.eventuate.tram.commands.common.CommandMessageHeaders;
+import io.eventuate.tram.examples.basic.commands.common.CommandConfigurationProperties;
 import io.eventuate.tram.examples.basic.commands.common.ReserveCreditCommand;
 import io.eventuate.tram.examples.basic.commands.producer.CommandProducerConfiguration;
-import io.eventuate.tram.examples.basic.commands.producer.CommandProducingService;
 import io.eventuate.tram.examples.basic.commands.producer.ProduceRequest;
-import io.eventuate.tram.messaging.common.Message;
-import io.eventuate.tram.messaging.producer.MessageBuilder;
 import io.eventuate.tram.spring.testing.outbox.commands.CommandOutboxTestSupport;
 import io.eventuate.tram.spring.testing.outbox.commands.CommandOutboxTestSupportConfiguration;
 import io.restassured.RestAssured;
@@ -21,11 +17,6 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.jdbc.core.JdbcTemplate;
-
-import java.util.List;
-import java.util.Map;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(classes = CommandProducerBrokerTest.Config.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         properties = {"command.commandChannel=command-${random.value}",
@@ -54,7 +45,7 @@ public class CommandProducerBrokerTest {
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    private CommandProducingService commandProducingService;
+    private CommandConfigurationProperties commandConfigurationProperties;
 
     @Test
     public void shouldSendCommand() {
@@ -69,20 +60,7 @@ public class CommandProducerBrokerTest {
                 .then()
                 .statusCode(200);
 
-        assertCommandMessageSent(commandProducingService.commandChannel());
-    }
-
-    public void assertCommandMessageSent(String channel) {
-
-        List<Message> messages = jdbcTemplate.query("select headers,payload from message where destination = ?", (rs, rowNum) -> {
-            String headers = rs.getString("headers");
-            String payload = rs.getString("payload");
-            return MessageBuilder.withPayload(payload).withExtraHeaders("", JSonMapper.fromJson(headers, Map.class)).build();
-        }, channel);
-
-        assertThat(messages)
-                .hasSize(1)
-                .allMatch(reply -> ReserveCreditCommand.class.getName().equals(reply.getRequiredHeader(CommandMessageHeaders.COMMAND_TYPE)));
+        commandOutboxTestSupport.assertCommandMessageSent(commandConfigurationProperties.getCommandChannel(), ReserveCreditCommand.class);
     }
 
 }
