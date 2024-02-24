@@ -16,7 +16,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 @SpringBootTest(classes = CommandProducerBrokerTest.Config.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         properties = {"command.commandChannel=command-${random.value}",
@@ -40,9 +39,6 @@ public class CommandProducerBrokerTest {
 
     @Autowired
     private CommandOutboxTestSupport commandOutboxTestSupport;
-
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
 
     @Autowired
     private CommandConfigurationProperties commandConfigurationProperties;

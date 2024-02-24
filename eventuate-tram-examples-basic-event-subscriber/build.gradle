@@ -4,12 +4,7 @@ dependencies {
 
     implementation "io.eventuate.tram.core:eventuate-tram-spring-events-subscriber-starter"
 
-    if (messageBroker == 'kafka') {
-        implementation "io.eventuate.tram.core:eventuate-tram-spring-jdbc-$messageBroker"
-    } else {
-        implementation "io.eventuate.tram.core:eventuate-tram-jdbc-$messageBroker"
-    }
-
+    implementation "io.eventuate.tram.core:eventuate-tram-spring-jdbc-$messageBroker"
     implementation "org.springframework.boot:spring-boot-starter"
 
     testImplementation project(":eventuate-tram-examples-basic-event-publisher")
