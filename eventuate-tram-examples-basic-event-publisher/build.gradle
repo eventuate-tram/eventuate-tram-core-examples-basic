@@ -3,7 +3,7 @@ apply plugin: 'org.springframework.boot'
 dependencies {
     implementation "io.eventuate.tram.core:eventuate-tram-spring-events-publisher-starter"
 
-    implementation "io.eventuate.tram.core:eventuate-tram-spring-jdbc-$messageBroker"
+    runtimeOnly "io.eventuate.tram.core:eventuate-tram-spring-jdbc-$messageBroker"
     implementation "org.springframework.boot:spring-boot-starter-web"
 
     testImplementation "io.eventuate.tram.core:eventuate-tram-spring-testing-support-messaging:$eventuateTramVersion" // FIXME

@@ -2,7 +2,7 @@ dependencies {
     implementation project(":eventuate-tram-examples-basic-command-common")
     implementation "io.eventuate.tram.core:eventuate-tram-spring-commands-starter"
 
-    implementation "io.eventuate.tram.core:eventuate-tram-spring-jdbc-$messageBroker"
+    runtimeOnly "io.eventuate.tram.core:eventuate-tram-spring-jdbc-$messageBroker"
 
     implementation "org.springframework.boot:spring-boot-starter-web"
 

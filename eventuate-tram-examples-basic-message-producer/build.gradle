@@ -5,8 +5,9 @@ dependencies {
     implementation project(":eventuate-tram-examples-basic-message-common")
 
     implementation "io.eventuate.tram.core:eventuate-tram-spring-messaging-starter"
+    implementation "io.eventuate.tram.core:eventuate-tram-spring-messaging"
 
-    implementation "io.eventuate.tram.core:eventuate-tram-spring-jdbc-$messageBroker"
+    runtimeOnly "io.eventuate.tram.core:eventuate-tram-spring-jdbc-$messageBroker"
     implementation "org.springframework.boot:spring-boot-starter-web"
 
     testImplementation "io.eventuate.tram.core:eventuate-tram-spring-testing-support-messaging:$eventuateTramVersion" // FIXME

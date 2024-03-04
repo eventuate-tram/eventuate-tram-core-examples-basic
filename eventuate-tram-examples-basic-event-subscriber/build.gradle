@@ -4,7 +4,7 @@ dependencies {
 
     implementation "io.eventuate.tram.core:eventuate-tram-spring-events-subscriber-starter"
 
-    implementation "io.eventuate.tram.core:eventuate-tram-spring-jdbc-$messageBroker"
+    runtimeOnly "io.eventuate.tram.core:eventuate-tram-spring-jdbc-$messageBroker"
     implementation "org.springframework.boot:spring-boot-starter"
 
     testImplementation project(":eventuate-tram-examples-basic-event-publisher")
