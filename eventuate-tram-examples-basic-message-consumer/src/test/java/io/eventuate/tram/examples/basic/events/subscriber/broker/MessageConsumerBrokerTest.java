@@ -1,10 +1,10 @@
 package io.eventuate.tram.examples.basic.events.subscriber.broker;
 
-import io.eventuate.tram.examples.basic.events.publisher.EventPublisherConfiguration;
-import io.eventuate.tram.examples.basic.events.publisher.PublishRequest;
-import io.eventuate.tram.examples.basic.events.subscriber.EventSubscriberConfiguration;
-import io.eventuate.tram.examples.basic.events.subscriber.common.AssertableAccountEventsConsumer;
-import io.eventuate.tram.examples.basic.events.subscriber.common.AssertableAccountEventsConsumerConfiguration;
+import io.eventuate.tram.examples.basic.events.publisher.MessageProducerConfiguration;
+import io.eventuate.tram.examples.basic.events.publisher.ProduceRequest;
+import io.eventuate.tram.examples.basic.events.subscriber.MessageConsumerConfiguration;
+import io.eventuate.tram.examples.basic.events.subscriber.common.AssertableMessageHandler;
+import io.eventuate.tram.examples.basic.events.subscriber.common.AssertableMessageHandlerConfiguration;
 import io.eventuate.util.test.async.Eventually;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -21,12 +21,13 @@ import java.util.concurrent.TimeUnit;
 
 import static io.restassured.RestAssured.given;
 
-@SpringBootTest(classes = EventSubscriberBrokerTest.Config.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class EventSubscriberBrokerTest {
+@SpringBootTest(classes = MessageConsumerBrokerTest.Config.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+        properties = {"message.channel=message-${random.value}"})
+public class MessageConsumerBrokerTest {
 
     @Configuration
     @EnableAutoConfiguration
-    @Import({EventPublisherConfiguration.class, EventSubscriberConfiguration.class, AssertableAccountEventsConsumerConfiguration.class})
+    @Import({MessageProducerConfiguration.class, MessageConsumerConfiguration.class, AssertableMessageHandlerConfiguration.class})
     public static class Config {
     }
 
@@ -39,23 +40,23 @@ public class EventSubscriberBrokerTest {
     }
 
     @Autowired
-    private AssertableAccountEventsConsumer accountEventsConsumer;
+    private AssertableMessageHandler assertableMessageHandler;
 
     @Test
-    public void shouldPublishEvent() {
+    public void shouldConsumeMessage() {
 
         long accountId = System.currentTimeMillis();
 
         given().when()
                 .log().all()
-                .body(new PublishRequest(accountId, 102L))
+                .body(new ProduceRequest(accountId))
                 .contentType(ContentType.JSON)
-                .post("/publish")
+                .post("/produce")
                 .then()
                 .statusCode(200);
 
         Eventually.eventually(100, 500, TimeUnit.MILLISECONDS, () -> {
-            accountEventsConsumer.assertEventPublished(Long.toString(accountId));
+            assertableMessageHandler.assertEventPublished();
         });
 
     }
