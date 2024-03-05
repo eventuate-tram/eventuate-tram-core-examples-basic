@@ -5,7 +5,6 @@ dependencies {
     implementation project(":eventuate-tram-examples-basic-message-common")
 
     implementation "io.eventuate.tram.core:eventuate-tram-spring-messaging-starter"
-    implementation "io.eventuate.tram.core:eventuate-tram-messaging"
 
     runtimeOnly "io.eventuate.tram.core:eventuate-tram-spring-jdbc-$messageBroker"
     implementation "org.springframework.boot:spring-boot-starter"
