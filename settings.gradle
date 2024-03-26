@@ -1,6 +1,7 @@
 include 'eventuate-tram-examples-basic-message-common'
 include 'eventuate-tram-examples-basic-message-producer'
 include 'eventuate-tram-examples-basic-message-consumer'
+include 'eventuate-tram-examples-basic-event-common'
 include 'eventuate-tram-examples-basic-event-publisher'
 include 'eventuate-tram-examples-basic-event-subscriber'
 include 'eventuate-tram-examples-basic-event-cqrs-subscriber'

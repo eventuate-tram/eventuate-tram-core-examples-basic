@@ -21,7 +21,9 @@ import java.util.concurrent.TimeUnit;
 
 import static io.restassured.RestAssured.given;
 
-@SpringBootTest(classes = CqrsEventSubscriberBrokerTest.Config.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = CqrsEventSubscriberBrokerTest.Config.class,
+        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+        properties = {"event.aggregate.suffix=-${random.value}"})
 public class CqrsEventSubscriberBrokerTest {
 
     @Configuration

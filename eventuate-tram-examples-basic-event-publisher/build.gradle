@@ -1,6 +1,9 @@
 apply plugin: 'org.springframework.boot'
 
 dependencies {
+
+    implementation project(":eventuate-tram-examples-basic-event-common")
+
     implementation "io.eventuate.tram.core:eventuate-tram-spring-events-publisher-starter"
 
     runtimeOnly "io.eventuate.tram.core:eventuate-tram-spring-jdbc-$messageBroker"

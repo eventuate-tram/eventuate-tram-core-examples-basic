@@ -1,6 +1,7 @@
 package io.eventuate.tram.examples.basic.events.publisher;
 
 import io.eventuate.tram.events.publisher.DomainEventPublisher;
+import io.eventuate.tram.examples.basic.events.common.EventConfigurationProperties;
 import io.eventuate.tram.examples.basic.events.domain.AccountDebited;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,20 +15,23 @@ import java.util.Collections;
 @RestController
 public class EventPublisherController {
 
-    private Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    private DomainEventPublisher domainEventPublisher;
+    private final DomainEventPublisher domainEventPublisher;
+    private final EventConfigurationProperties eventConfigurationProperties;
 
     @Autowired
-    public EventPublisherController(DomainEventPublisher domainEventPublisher) {
+    public EventPublisherController(DomainEventPublisher domainEventPublisher, EventConfigurationProperties eventConfigurationProperties) {
         this.domainEventPublisher = domainEventPublisher;
+        this.eventConfigurationProperties = eventConfigurationProperties;
     }
 
     @PostMapping("/publish")
     public void publish(@RequestBody PublishRequest publishRequest) {
-        logger.info("Publishing {}", publishRequest);
-        domainEventPublisher.publish("Account", publishRequest.accountId(), Collections.singletonList(new AccountDebited(publishRequest.amount())));
-        logger.info("Published {}", publishRequest);
+        String aggregateType = "Account" + eventConfigurationProperties.getAggregateSuffix();
+        logger.info("Publishing {} to {}", publishRequest, aggregateType);
+        domainEventPublisher.publish(aggregateType, publishRequest.accountId(), Collections.singletonList(new AccountDebited(publishRequest.amount())));
+        logger.info("Published {} to {}", publishRequest, aggregateType);
     }
 
 }

@@ -3,9 +3,11 @@ package io.eventuate.tram.examples.basic.events.subscriber;
 import io.eventuate.tram.events.subscriber.DomainEventEnvelope;
 import io.eventuate.tram.events.subscriber.DomainEventHandlers;
 import io.eventuate.tram.events.subscriber.DomainEventHandlersBuilder;
+import io.eventuate.tram.examples.basic.events.common.EventConfigurationProperties;
 import io.eventuate.tram.examples.basic.events.domain.AccountDebited;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
@@ -18,9 +20,12 @@ public class AccountEventsConsumer {
   public AccountEventsConsumer() {
   }
 
+  @Autowired
+  private EventConfigurationProperties eventConfigurationProperties;
+
   public DomainEventHandlers domainEventHandlers() {
     return DomainEventHandlersBuilder
-            .forAggregateType("Account")
+            .forAggregateType("Account" + eventConfigurationProperties.getAggregateSuffix())
             .onEvent(AccountDebited.class, this::handleAccountDebited)
             .build();
   }
