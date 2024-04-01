@@ -5,8 +5,9 @@ dependencies {
     implementation project(":eventuate-tram-examples-basic-event-common")
 
     implementation "io.eventuate.tram.core:eventuate-tram-spring-events-subscriber-starter"
+    implementation "io.eventuate.tram.core:eventuate-tram-spring-consumer-common"
 
-    implementation "io.eventuate.tram.core:eventuate-tram-consumer-$messageBroker"
+    runtimeOnly "io.eventuate.tram.core:eventuate-tram-spring-consumer-$messageBroker"
 
     implementation "org.springframework.boot:spring-boot-starter"
 
