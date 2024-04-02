@@ -35,59 +35,72 @@ dockerCompose {
     environment.put "EVENTUATE_MESSAGING_KAFKA_IMAGE_VERSION", eventuateMessagingKafkaImageVersion
     environment.put "EVENTUATE_CDC_VERSION", eventuateCdcImageVersion
 
+    if (database == "mysql") {
+        environment.put "SPRING_DATASOURCE_URL", "jdbc:mysql://database/eventuate"
+        environment.put "SPRING_DATASOURCE_USERNAME", "mysqluser"
+        environment.put "SPRING_DATASOURCE_PASSWORD", "mysqlpw" 
+        environment.put "SPRING_DATASOURCE_DRIVER_CLASS_NAME", "com.mysql.cj.jdbc.Driver"
+    } else {
+        environment.put "SPRING_DATASOURCE_URL", "jdbc:postgresql://database/eventuate"
+        environment.put "SPRING_DATASOURCE_USERNAME", "eventuate"
+        environment.put "SPRING_DATASOURCE_PASSWORD", "eventuate"
+        environment.put "SPRING_DATASOURCE_DRIVER_CLASS_NAME", "org.postgresql.Driver"
+    }
+
     removeOrphans = true
     dockerComposeStopTimeout = Duration.ofSeconds(1)
+    retainContainersOnStartupFailure = true
 
     mysqlbinlogkafka {
         projectName = null
-        useComposeFiles = ["docker-compose-mysql-binlog.yml"]
+        useComposeFiles = ["docker-compose-files/mysql.yml", "docker-compose-files/kafka.yml", "docker-compose-files/cdc-service.yml"]
     }
 
     mysqlbinlogactivemq {
         projectName = null
-        useComposeFiles = ["docker-compose-mysql-binlog.yml"]
+        useComposeFiles = ["docker-compose-files/mysql.yml", "docker-compose-files/activemq.yml", "docker-compose-files/cdc-service.yml"]
         environment.put "SPRING_PROFILES_ACTIVE", "ActiveMQ"
     }
 
     mysqlbinlograbbitmq {
         projectName = null
-        useComposeFiles = ["docker-compose-mysql-binlog.yml"]
+        useComposeFiles = ["docker-compose-files/mysql.yml", "docker-compose-files/rabbitmq.yml", "docker-compose-files/cdc-service.yml"]
         environment.put "SPRING_PROFILES_ACTIVE", "RabbitMQ"
     }
 
     postgrespollingkafka {
         projectName = null
-        useComposeFiles = ["docker-compose-postgres-polling.yml"]
+        useComposeFiles = ["docker-compose-files/postgres.yml", "docker-compose-files/kafka.yml", "docker-compose-files/cdc-service.yml"]
         environment.put "SPRING_PROFILES_ACTIVE", "EventuatePolling,Postgres"
     }
 
     postgrespollingactivemq {
         projectName = null
-        useComposeFiles = ["docker-compose-postgres-polling.yml"]
+        useComposeFiles = ["docker-compose-files/postgres.yml", "docker-compose-files/activemq.yml", "docker-compose-files/cdc-service.yml"]
         environment.put "SPRING_PROFILES_ACTIVE", "EventuatePolling,Postgres,ActiveMQ"
     }
 
     postgrespollingrabbitmq {
         projectName = null
-        useComposeFiles = ["docker-compose-postgres-polling.yml"]
+        useComposeFiles = ["docker-compose-files/postgres.yml", "docker-compose-files/rabbitmq.yml", "docker-compose-files/cdc-service.yml"]
         environment.put "SPRING_PROFILES_ACTIVE", "EventuatePolling,RabbitMQ,Postgres"
     }
 
     postgreswalkafka {
         projectName = null
-        useComposeFiles = ["docker-compose-postgres-wal.yml"]
+        useComposeFiles = ["docker-compose-files/postgres.yml", "docker-compose-files/kafka.yml", "docker-compose-files/cdc-service.yml"]
         environment.put "SPRING_PROFILES_ACTIVE", "PostgresWal,Postgres"
     }
 
     postgreswalactivemq {
         projectName = null
-        useComposeFiles = ["docker-compose-postgres-wal.yml"]
+        useComposeFiles = ["docker-compose-files/postgres.yml", "docker-compose-files/activemq.yml", "docker-compose-files/cdc-service.yml"]
         environment.put "SPRING_PROFILES_ACTIVE", "PostgresWal,ActiveMQ,Postgres"
     }
 
     postgreswalrabbitmq {
         projectName = null
-        useComposeFiles = ["docker-compose-postgres-wal.yml"]
+        useComposeFiles = ["docker-compose-files/postgres.yml", "docker-compose-files/rabbitmq.yml", "docker-compose-files/cdc-service.yml"]
         environment.put "SPRING_PROFILES_ACTIVE", "PostgresWal,RabbitMQ,Postgres"
     }
 

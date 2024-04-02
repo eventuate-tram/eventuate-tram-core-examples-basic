@@ -1,0 +1,17 @@
+version: '3'
+services:
+
+  broker:
+    image: "eventuateio/eventuate-kafka:$EVENTUATE_MESSAGING_KAFKA_IMAGE_VERSION"
+    ports:
+      - 9092:9092
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_LISTENERS: LC://broker:29092,LX://broker:9092
+      KAFKA_ADVERTISED_LISTENERS: LC://broker:29092,LX://${DOCKER_HOST_IP:-localhost}:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: LC:PLAINTEXT,LX:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: LC
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_HEAP_OPTS: -Xmx192m
