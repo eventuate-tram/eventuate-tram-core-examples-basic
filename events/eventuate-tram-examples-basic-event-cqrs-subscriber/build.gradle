@@ -1,0 +1,26 @@
+apply plugin: 'org.springframework.boot'
+
+dependencies {
+
+    implementation project(":events:eventuate-tram-examples-basic-event-common")
+
+    implementation "io.eventuate.tram.core:eventuate-tram-spring-events-subscriber-starter"
+    implementation "io.eventuate.tram.core:eventuate-tram-spring-consumer-common"
+
+    runtimeOnly "io.eventuate.tram.core:eventuate-tram-spring-consumer-$messageBroker"
+
+    implementation "org.springframework.boot:spring-boot-starter"
+
+    testImplementation project(":events:eventuate-tram-examples-basic-event-publisher")
+
+    testImplementation "io.eventuate.tram.core:eventuate-tram-spring-in-memory"
+    testImplementation "io.eventuate.util:eventuate-util-test"
+
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "io.rest-assured:spring-mock-mvc"
+
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -1,0 +1,23 @@
+apply plugin: 'org.springframework.boot'
+
+dependencies {
+
+    implementation project(":messages:eventuate-tram-examples-basic-message-common")
+
+    implementation "io.eventuate.tram.core:eventuate-tram-spring-messaging-starter"
+
+    runtimeOnly "io.eventuate.tram.core:eventuate-tram-spring-jdbc-$messageBroker"
+    implementation "org.springframework.boot:spring-boot-starter-web"
+
+    testImplementation "io.eventuate.tram.core:eventuate-tram-spring-testing-support-messaging:$eventuateTramVersion" // FIXME
+    testImplementation "io.eventuate.tram.core:eventuate-tram-spring-in-memory"
+    testImplementation "io.eventuate.util:eventuate-util-test"
+
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "io.rest-assured:spring-mock-mvc"
+
+}
+
+test {
+    useJUnitPlatform()
+}
