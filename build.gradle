@@ -122,3 +122,23 @@ task startServices {
 task stopServices {
     dependsOn "${database}${effectiveMode(mode, database)}${messageBroker}ComposeDown"
 }
+
+gradle.projectsEvaluated {
+
+    subprojects { project ->
+        if (project.name.endsWith("-common") || project.name.contains("testing") || !project.name.contains("-")) {
+            return
+        }
+        project.test {
+            if (database != "mysql") {
+                systemProperty "spring.profiles.active", database
+            }
+            useJUnitPlatform()
+        }
+        tasks.named("bootRun") {
+            if (database != "mysql") {
+                systemProperty "spring.profiles.active", database
+            }
+        }
+    }
+}

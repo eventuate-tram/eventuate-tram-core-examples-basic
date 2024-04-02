@@ -29,7 +29,7 @@ public class MessageHandler {
   }
 
   public void handleMessage(Message event) {
-    logger.info("Got event {}", event);
+    logger.info("Got message {}", event);
     queue.add(event);
   }
 

@@ -17,7 +17,7 @@ public class CqrsEventSubscriberConfiguration {
     @Bean
     public DomainEventDispatcher domainEventDispatcher(DomainEventDispatcherFactory domainEventDispatcherFactory,
                                                        AccountEventsConsumer target) {
-        return domainEventDispatcherFactory.make("eventSubscriber",
+        return domainEventDispatcherFactory.make("cqrsEventSubscriber",
                 target.domainEventHandlers());
     }
 

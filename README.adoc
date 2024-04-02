@@ -3,13 +3,8 @@
 image::https://eventuate.io/i/logo.gif[]
 
 This project is part of http://eventuate.io[Eventuate], which is a microservices collaboration platform.
+It consists of a basic set of Spring Boot-based examples that show how to use https://github.com/eventuate-tram/eventuate-tram-core[Eventuate Tram], which is a framework for transactional messaging.
 
-It consists of a basic set of examples that show how to use the https://github.com/eventuate-tram/eventuate-tram-core[Eventuate Tram], which is a framework for transactional messaging, with Spring Boot.
-
-The examples support a variety of databases and message brokers:
-
-* Databases: MySQL, PostgreSQL
-* Message brokers: Apache Kafka, RabbitMQ, and ActiveMQ
 
 == About the examples
 
@@ -19,106 +14,153 @@ There are the following examples:
 * Event publishing/subscribing - publishing of and subscribing to domain events
 * Command/async reply - sending commands and receiving replies
 
-=== Messaging
-=== Event publishing/subscribing
-=== Command/async reply
+Each example has a producer service and at least one consumer service.
+
+== Supported databases and message brokers
+
+The examples support a variety of databases and message brokers:
+
+* Databases: MySQL, PostgreSQL
+* Message brokers: Apache Kafka, RabbitMQ, and ActiveMQ
+
+There are the following Gradle properties that specify which infrastructure services to use:
+
+* `messageBroker` - specifies the messageBroker, which can be `kafka`, `rabbitmq`, or `activemq`. It defaults to `kafka`.
+* `database` - specifies the database, which can be `mysql` or `postgres`. It defaults to `mysql`.
+* `mode` - specifies how the https://eventuate.io/docs/manual/eventuate-tram/latest/cdc-configuration.html[`Eventuate CDC` service] reads the transactional outbox table. It defaults to `binlog` for MySql and `wal` for Postgres. It can also be set to `polling` for Postgres.
+
+Various Gradle tasks for building, and running the services can be configured with these properties.
+For example,
+
+[source,shell]
+----
+./gradlew  -P messageBroker=activemq -P database=postgres someTask
+----
+
+executes `someTask` using Postgres and ActiveMQ.
+
+== Running the infrastructure services
+
+Before running the examples, you need to start the infrastructure services:
+
+[source,shell]
+----
+$ ./gradlew startServices -P messageBroker=kafka -P database=mysql
+----
+
+Similarly, you can stop the services by running:
+
+[source,shell]
+----
+$ ./gradlew stopServices -P messageBroker=kafka -P database=mysql
+----
+
+== About the messaging examples
+
+The examples are in the link:messages[messages directory].
+There are two services:
+
+* `eventuate-tram-examples-basic-message-producer` - a service that implements a `POST /produce` endpoint that sends a message to a channel
+* `eventuate-tram-examples-basic-message-consumer` - a service that subscribes the channel
+
+This command starts the producer:
+
+[source,shell]
+----
+$ ./gradlew :messages:eventuate-tram-examples-basic-message-producer:bootRun
+----
+
+This command starts the consumer:
+
+[source,shell]
+----
+$ ./gradlew :messages:eventuate-tram-examples-basic-message-consumer:bootRun
+----
+
+You can then send a message to the producer:
+
+[source,shell]
+----
+$ http POST localhost:8080/produce accountId=101
+----
+
+You should see a `2024-04-02 13:42:29.644  INFO 66525 --- [pool-1-thread-1] i.e.t.e.b.e.subscriber.MessageHandler    : Got message ...` log entry in the consumer.
+
+=== About the event publishing/subscribing examples
+
+These examples are in the link:events[events directory].
+There are three services:
+
+* `eventuate-tram-examples-basic-event-publisher` - a service that implements a `POST /publish` endpoint publishes an event to a channel
+* `eventuate-tram-examples-basic-event-subscriber` - a service that subscribes to the event channel
+* `eventuate-tram-examples-basic-event-cqrs-subscriber` - a subscriber service that does NOT use the (relational) database to implement message handler idempotency
+
+The following command starts the producer:
+
+[source,shell]
+----
+$ ./gradlew :events:eventuate-tram-examples-basic-event-publisher:bootRun
+----
+
+This command starts the subscriber:
+
+[source,shell]
+----
+$ ./gradlew :events:eventuate-tram-examples-basic-event-subscriber:bootRun
+----
+
+This command starts the CQRS subscriber:
+
+[source,shell]
+----
+$ ./gradlew :events:eventuate-tram-examples-basic-event-crqs:subscriber:bootRun
+----
 
 
-It consists of the following modules:
+This command triggers the publishing of event:
 
-* `eventuate-tram-examples-common` - the examples for basic messaging, domain events and command/async reply
-* `eventuate-tram-examples-in-memory` - runs the examples using in-memory stubs
-* `eventuate-tram-examples-jdbc-kafka` - runs the examples using MySQL and Apache Kafka
+[source,shell]
+----
+$ http POST localhost:8080/publish accountId=10 amount=12
+----
 
-== About `eventuate-tram-examples-common`
+== About the command/async reply examples
 
-This module defines the transactional messaging examples:
+These examples are in the link:commands[commands directory].
+There are two services:
 
-* Basic messaging
-* Domain events
-* Commands, which implement request/asynchronous response
+* `eventuate-tram-examples-basic-command-producer` - a service that implements a `POST /send` endpoint sends a command to a channel
+* `eventuate-tram-examples-basic-command-consumer` - a service that subscribes to a command channel and sends a reply
 
-You can run the examples using the tests in the `eventuate-tram-examples-in-memory` and `eventuate-tram-examples-jdbc-kafka` modules.
+This commands starts the producer:
 
+[source,shell]
+----
+$ ./gradlew :commands:eventuate-tram-examples-basic-command-producer:bootRun
+----
 
-== About `eventuate-tram-examples-in-memory` - running in-memory examples
+This command starts the consumer:
 
-This module executes the examples using `eventuate-tram-in-memory` module, which is extremely useful for writing fast running tests.
+[source,shell]
+----
+$ ./gradlew :commands:eventuate-tram-examples-basic-command-consumer:bootRun
+----
 
-To run this version of the tests:
+You can then send a command to the consumer:
 
-```
-./gradlew :eventuate-tram-examples-in-memory:test
-```
+[source,shell]
+----
+$ http POST localhost:8080/send customerId=101
+----
 
-== About `eventuate-tram-examples-jdbc-kafka` - running examples with MySQL and Apache Kafka
+== Runnning the tests
 
-This module executes the examples using MySQL and Apache Kafka.
+After starting the infrastructure services, you can also run the tests:
 
-=== Set DOCKER_HOST_IP environment variable
-
-Before running MySQL and Apache Kafka using Docker Compose, you first need to set the `DOCKER_HOST_IP` environment variable.
-This must be an IP address or resolvable hostname.
-It cannot be `localhost` or `127.0.0.1`.
-Please see this http://eventuate.io/docs/usingdocker.html[guide to setting `DOCKER_HOST_IP`] for more information.
-
-=== Run MySQL and Apache Kafka
-
-Once you have set `DOCKER_HOST_IP` you can then run MySQL and Apache Kafka using Docker Compose.
-
-```
-gradlew <database><mode>ComposeBuild
-gradlew <database><mode>ComposeUp
-```
-where <database><mode> one of
-
-* mysqlbinlog
-* postgrespolling
-* postgreswal
-
-=== Run the tests
-
-Once the containers have started you can run the tests:
-
-```
-./gradlew :eventuate-tram-examples-jdbc-kafka:test
-```
-
-=== Inspect the database
-
-You can inspect the Eventuate Tram-related database tables:
-
-```
-$ ./mysql-cli.sh -it
-Welcome to the MySQL monitor.  Commands end with ; or \g.
-...
-
-mysql> select * from message\G
-*************************** 1. row ***************************
-         id: 00000168d96469db-acde480011220000
-destination: destination1549835461824
-    headers: {"DESTINATION":"destination1549835461824","ID":"00000168d96469db-acde480011220000"}
-    payload: Hello1549835461824
-  published: 0
-
-...
-mysql> select * from received_messages\G
-*************************** 1. row ***************************
-consumer_id: commandDispatcheId1549835467791
- message_id: 00000168d9647f65-acde480011220000
-*************************** 2. row ***************************
-...
-mysql> quit
-Bye
-```
-
-=== Clean up
-
-To clean up:
-
-```
-./gradlew <database><mode>ComposeDown
-```
+[source,shell]
+----
+$ ./gradlew build
+----
 
 == For more information
 

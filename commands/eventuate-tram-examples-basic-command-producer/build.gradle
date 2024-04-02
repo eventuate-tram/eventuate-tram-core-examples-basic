@@ -1,3 +1,5 @@
+apply plugin: 'org.springframework.boot'
+
 dependencies {
     implementation project(":commands:eventuate-tram-examples-basic-command-common")
     implementation "io.eventuate.tram.core:eventuate-tram-spring-commands-starter"
@@ -20,9 +22,4 @@ dependencies {
 
 }
 
-test {
-    if (database != "mysql") {
-        systemProperty "spring.profiles.active", database
-    }    
-    useJUnitPlatform()
-}
+

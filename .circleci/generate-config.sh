@@ -10,8 +10,8 @@ workflows:
     jobs:
 END
 
-for build_script in build-and-test-all*.sh ; do
-build_script_name=$(echo $build_script | sed -e 's/\.sh//' -e 's/build-and-test-all-//')
+for build_script in scripts/build-and-test-all*.sh ; do
+build_script_name=$(echo $build_script | sed -e 's/\.sh//' -e 's/build-and-test-all-//' -e 's?scripts/??')
 cat >> generated_config.yml <<END
       - eventuate-gradle-build-and-test/build-and-test:
           name: $build_script_name
