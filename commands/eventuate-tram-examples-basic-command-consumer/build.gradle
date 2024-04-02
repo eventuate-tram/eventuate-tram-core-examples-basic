@@ -24,6 +24,9 @@ dependencies {
 }
 
 test {
+    if (database != "mysql") {
+        systemProperty "spring.profiles.active", database
+    }    
     useJUnitPlatform()
 }
 

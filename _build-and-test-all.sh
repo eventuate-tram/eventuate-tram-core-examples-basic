@@ -13,6 +13,6 @@ ${dockerall}Build
 
 ${dockerall}Up
 
-./gradlew build -P messageBroker=$BROKER
+./gradlew build -P messageBroker=$BROKER -P database=${DATABASE}
 
 ${dockerall}Down
