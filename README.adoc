@@ -3,7 +3,10 @@
 image::https://eventuate.io/i/logo.gif[]
 
 This project is part of http://eventuate.io[Eventuate], which is a microservices collaboration platform.
-It consists of a basic set of Spring Boot-based examples that show how to use https://github.com/eventuate-tram/eventuate-tram-core[Eventuate Tram], which is a framework for transactional messaging.
+It consists of a basic set of Spring Boot-based examples that show how to use https://github.com/eventuate-tram/eventuate-tram-core[Eventuate Tram], which is a framework for https://microservices.io/patterns/data/transactional-outbox.html[transactional messaging].
+Eventuate Tram sends and receives messages as part of a database transaction, which maintains data consistency.
+It ensures that your application atomically updates the database and sends messages.
+Eventuate Tram also ensures that your https://microservices.io/patterns/communication-style/idempotent-consumer.html[message handlers are idempotent].
 
 
 == About the examples
@@ -132,7 +135,7 @@ There are two services:
 * `eventuate-tram-examples-basic-command-producer` - a service that implements a `POST /send` endpoint sends a command to a channel
 * `eventuate-tram-examples-basic-command-consumer` - a service that subscribes to a command channel and sends a reply
 
-This commands starts the producer:
+This command starts the producer:
 
 [source,shell]
 ----
