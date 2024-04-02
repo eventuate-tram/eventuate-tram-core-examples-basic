@@ -1,10 +1,12 @@
-#! /bin/bash -e
+#! /bin/bash
 
-set -o pipefail
+DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
+set -e -o pipefail
 
 date > build-and-test-everything.log
 
-for script in $DIR/build-and-test-all*.sh ; do
+for script in ${DIR?}/build-and-test-all*.sh ; do
    echo '****************************************** Running' $script
    date >> build-and-test-everything.log
    echo '****************************************** Running' $script >> build-and-test-everything.log
