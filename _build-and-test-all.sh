@@ -2,17 +2,16 @@
 
 set -e
 
-export SPRING_PROFILES_ACTIVE=${DATABASE?}
+GRADLE_PROPERTIES="-P messageBroker=$BROKER -P database=${DATABASE} -P mode=${MODE}"
 
-dockerall="./gradlew ${DATABASE}${MODE}${BROKER}Compose"
+echo $GRADLE_PROPERTIES
 
-./gradlew testClasses
+./gradlew $GRADLE_PROPERTIES testClasses
 
-${dockerall}Down
-${dockerall}Build
+./gradlew $GRADLE_PROPERTIES stopServices
 
-${dockerall}Up
+./gradlew $GRADLE_PROPERTIES startServices
 
-./gradlew build -P messageBroker=$BROKER -P database=${DATABASE}
+./gradlew $GRADLE_PROPERTIES build
 
-${dockerall}Down
+./gradlew $GRADLE_PROPERTIES stopServices

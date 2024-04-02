@@ -1,14 +1,28 @@
-= An Eventuate project
+= Eventuate Tram basic examples
 
 image::https://eventuate.io/i/logo.gif[]
 
 This project is part of http://eventuate.io[Eventuate], which is a microservices collaboration platform.
 
+It consists of a basic set of examples that show how to use the https://github.com/eventuate-tram/eventuate-tram-core[Eventuate Tram], which is a framework for transactional messaging, with Spring Boot.
 
-= Eventuate Tram basic examples
+The examples support a variety of databases and message brokers:
 
-https://github.com/eventuate-tram/eventuate-tram-core[Eventuate Tram] implements transactional messaging for microservices written using JDBC.
-This project implements the examples shown in that project's https://github.com/eventuate-tram/eventuate-tram-core[README].
+* Databases: MySQL, PostgreSQL
+* Message brokers: Apache Kafka, RabbitMQ, and ActiveMQ
+
+== About the examples
+
+There are the following examples:
+
+* Messaging - sending and receiving messages
+* Event publishing/subscribing - publishing of and subscribing to domain events
+* Command/async reply - sending commands and receiving replies
+
+=== Messaging
+=== Event publishing/subscribing
+=== Command/async reply
+
 
 It consists of the following modules:
 

@@ -92,3 +92,20 @@ dockerCompose {
     }
 
 }
+
+def effectiveMode(mode, database) {
+    if (mode != "")
+        return mode
+    if (database == "mysql")
+        return "binlog"
+    else
+        return "wal"
+}
+
+task startServices {
+    dependsOn "${database}${effectiveMode(mode, database)}${messageBroker}ComposeUp"
+}
+
+task stopServices {
+    dependsOn "${database}${effectiveMode(mode, database)}${messageBroker}ComposeDown"
+}
