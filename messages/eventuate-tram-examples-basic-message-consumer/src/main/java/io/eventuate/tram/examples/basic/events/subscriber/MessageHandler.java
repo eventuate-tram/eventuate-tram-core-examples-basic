@@ -28,9 +28,9 @@ public class MessageHandler {
     messageConsumer.subscribe("messageConsumer-" + System.currentTimeMillis(), Set.of(messageConfigurationProperties.getChannel()), this::handleMessage);
   }
 
-  public void handleMessage(Message event) {
-    logger.info("Got message {}", event);
-    queue.add(event);
+  public void handleMessage(Message message) {
+    logger.info("Got message {}", message);
+    queue.add(message);
   }
 
   public BlockingQueue<Message> getQueue() {

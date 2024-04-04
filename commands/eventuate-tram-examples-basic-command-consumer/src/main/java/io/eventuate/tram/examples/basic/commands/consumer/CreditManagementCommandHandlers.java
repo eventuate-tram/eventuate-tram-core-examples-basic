@@ -25,7 +25,6 @@ public class CreditManagementCommandHandlers {
 
   }
   public Message reserveCredit(CommandMessage<ReserveCreditCommand> cm) {
-
     System.out.println("customerId=" + cm.getCommand().getCustomerId());
     System.out.println("cm=" + cm);
     return withSuccess();

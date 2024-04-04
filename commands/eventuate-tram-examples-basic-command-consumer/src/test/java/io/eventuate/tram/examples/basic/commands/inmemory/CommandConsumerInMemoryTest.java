@@ -53,7 +53,7 @@ public class CommandConsumerInMemoryTest {
     private CommandProducingService commandProducingService;
 
     @Test
-    public void shouldHandleCommand() throws InterruptedException {
+    public void shouldHandleCommand() {
         assertableMessageConsumer.subscribe(commandProducingService.replyChannel());
 
         String customerId = Long.toString(System.currentTimeMillis());

@@ -17,11 +17,13 @@ public class CommandProducingService {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     private final CommandProducer commandProducer;
+    private final CommandReplyHandler commandReplyHandler;
     private final CommandConfigurationProperties commandConfigurationProperties;
 
     @Autowired
-    public CommandProducingService(CommandProducer commandProducer, CommandConfigurationProperties commandConfigurationProperties) {
+    public CommandProducingService(CommandProducer commandProducer, CommandReplyHandler commandReplyHandler, CommandConfigurationProperties commandConfigurationProperties) {
         this.commandProducer = commandProducer;
+        this.commandReplyHandler = commandReplyHandler;
         this.commandConfigurationProperties = commandConfigurationProperties;
     }
 
@@ -29,6 +31,7 @@ public class CommandProducingService {
         logger.info("sending {}", produceRequest);
         var messageId = commandProducer.send(commandChannel(), new ReserveCreditCommand(produceRequest.customerId()), replyChannel(), Collections.emptyMap());
         logger.info("sent {}", produceRequest);
+        commandReplyHandler.noteCommandSent(messageId);
         return messageId;
     }
 
