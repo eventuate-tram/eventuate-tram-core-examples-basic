@@ -4,12 +4,14 @@ package io.eventuate.tram.examples.basic.commands.producer;
 import io.eventuate.tram.commands.producer.CommandProducer;
 import io.eventuate.tram.examples.basic.commands.common.ReserveCreditCommand;
 import io.eventuate.tram.examples.basic.commands.common.CommandConfigurationProperties;
+import io.eventuate.tram.messaging.common.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
+import java.util.List;
 
 @Component
 public class CommandProducingService {
@@ -41,5 +43,9 @@ public class CommandProducingService {
 
     public String replyChannel() {
         return commandConfigurationProperties.getReplyChannel();
+    }
+
+    public List<Message> getReplies() {
+        return commandReplyHandler.getReplies();
     }
 }

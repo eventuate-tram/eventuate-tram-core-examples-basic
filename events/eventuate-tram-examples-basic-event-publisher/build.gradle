@@ -6,8 +6,10 @@ dependencies {
 
     implementation "io.eventuate.tram.core:eventuate-tram-spring-events-publisher-starter"
 
-    runtimeOnly "io.eventuate.tram.core:eventuate-tram-spring-jdbc-$messageBroker"
+    runtimeOnly "io.eventuate.tram.core:eventuate-tram-spring-producer-jdbc"
     implementation "org.springframework.boot:spring-boot-starter-web"
+
+    testRuntimeOnly "io.eventuate.tram.core:eventuate-tram-spring-jdbc-$messageBroker"
 
     testImplementation "io.eventuate.tram.core:eventuate-tram-spring-testing-support-messaging:$eventuateTramVersion" // FIXME
     testImplementation "io.eventuate.tram.core:eventuate-tram-spring-in-memory"

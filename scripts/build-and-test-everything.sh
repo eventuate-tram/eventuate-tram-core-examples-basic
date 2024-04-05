@@ -4,13 +4,17 @@ DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 set -e -o pipefail
 
-date > build-and-test-everything.log
+mkdir -p build
+
+LOG_FILE=build/build-and-test-everything.log
+
+date > $LOG_FILE
 
 for script in ${DIR?}/build-and-test-all*.sh ; do
    echo '****************************************** Running' $script
-   date >> build-and-test-everything.log
-   echo '****************************************** Running' $script >> build-and-test-everything.log
-   $script | tee -a build-and-test-everything.log
+   date >> $LOG_FILE
+   echo '****************************************** Running' $script >> $LOG_FILE
+   $script | tee -a $LOG_FILE
 done
 
 echo 'Finished successfully!!!'
