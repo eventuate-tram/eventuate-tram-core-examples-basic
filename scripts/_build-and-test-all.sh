@@ -14,4 +14,10 @@ echo $GRADLE_PROPERTIES
 
 ./gradlew $GRADLE_PROPERTIES build
 
+if [ -n "$CIRCLECI" ]; then
+    pip3 install -r requirements.txt
+fi
+
+./run-end-to-end-test.py commands $GRADLE_PROPERTIES
+
 ./gradlew $GRADLE_PROPERTIES stopServices

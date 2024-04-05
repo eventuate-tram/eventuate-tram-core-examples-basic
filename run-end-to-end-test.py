@@ -7,7 +7,8 @@ import requests
 import time
 import yaml
 
-dir = "commands"
+dir = sys.argv[1]
+gradle_options = sys.argv[2:]
 
 with open('commands/end-to-end-test-config.yaml', 'r') as file:
     data = yaml.safe_load(file)
@@ -17,7 +18,7 @@ verify_url = data["verify_url"]
 
 def run_gradle(subproject):
     print(f"Running {subproject}")
-    command = ["./gradlew", f":{dir}:{subproject}:bootRun"]
+    command = ["./gradlew", f":{dir}:{subproject}:bootRun"] + gradle_options
     os.makedirs("./build", exist_ok=True)
     log_file = open(f"./build/{dir}-{subproject}.log", "w")
     return subprocess.Popen(command, stdin=subprocess.DEVNULL, stderr=log_file, stdout=log_file)
@@ -41,6 +42,7 @@ def wait_for_healthy(ports):
 
 
 def trigger_sending():
+    print(f"Triggering sending with {trigger_command}")
     command = trigger_command.split()
     process = subprocess.run(command, capture_output=True, text=True)
     if process.returncode != 0:
@@ -48,6 +50,7 @@ def trigger_sending():
         sys.exit(1)
 
 def wait_for_completion():
+    print(f"Waiting for replies at {verify_url}")
     while True:
         response = requests.get(verify_url)
 
