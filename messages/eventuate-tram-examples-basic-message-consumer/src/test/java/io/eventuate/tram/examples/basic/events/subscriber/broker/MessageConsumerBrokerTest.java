@@ -3,14 +3,11 @@ package io.eventuate.tram.examples.basic.events.subscriber.broker;
 import io.eventuate.tram.examples.basic.events.publisher.MessageProducerConfiguration;
 import io.eventuate.tram.examples.basic.events.publisher.ProduceRequest;
 import io.eventuate.tram.examples.basic.events.subscriber.MessageConsumerConfiguration;
-import io.eventuate.tram.examples.basic.events.subscriber.common.AssertableMessageHandler;
-import io.eventuate.tram.examples.basic.events.subscriber.common.AssertableMessageHandlerConfiguration;
 import io.eventuate.util.test.async.Eventually;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -27,7 +24,7 @@ public class MessageConsumerBrokerTest {
 
     @Configuration
     @EnableAutoConfiguration
-    @Import({MessageProducerConfiguration.class, MessageConsumerConfiguration.class, AssertableMessageHandlerConfiguration.class})
+    @Import({MessageProducerConfiguration.class, MessageConsumerConfiguration.class})
     public static class Config {
     }
 
@@ -38,9 +35,6 @@ public class MessageConsumerBrokerTest {
     public void setup() {
         RestAssured.port = port;
     }
-
-    @Autowired
-    private AssertableMessageHandler assertableMessageHandler;
 
     @Test
     public void shouldConsumeMessage() {
@@ -56,7 +50,11 @@ public class MessageConsumerBrokerTest {
                 .statusCode(200);
 
         Eventually.eventually(100, 500, TimeUnit.MILLISECONDS, () -> {
-            assertableMessageHandler.assertEventPublished();
+            given().when()
+                    .log().all()
+                    .get("/messages?accountId=" + accountId)
+                    .then()
+                    .statusCode(200);
         });
 
     }

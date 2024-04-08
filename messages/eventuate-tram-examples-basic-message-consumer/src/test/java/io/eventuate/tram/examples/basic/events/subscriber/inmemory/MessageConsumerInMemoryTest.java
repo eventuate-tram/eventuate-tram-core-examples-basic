@@ -3,15 +3,12 @@ package io.eventuate.tram.examples.basic.events.subscriber.inmemory;
 import io.eventuate.tram.examples.basic.events.publisher.MessageProducerConfiguration;
 import io.eventuate.tram.examples.basic.events.publisher.ProduceRequest;
 import io.eventuate.tram.examples.basic.events.subscriber.MessageConsumerConfiguration;
-import io.eventuate.tram.examples.basic.events.subscriber.common.AssertableMessageHandler;
-import io.eventuate.tram.examples.basic.events.subscriber.common.AssertableMessageHandlerConfiguration;
 import io.eventuate.tram.spring.inmemory.TramInMemoryConfiguration;
 import io.eventuate.util.test.async.Eventually;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -30,9 +27,7 @@ public class MessageConsumerInMemoryTest {
     @EnableAutoConfiguration
     @Import({
             MessageProducerConfiguration.class, MessageConsumerConfiguration.class,
-            TramInMemoryConfiguration.class,
-            AssertableMessageHandlerConfiguration.class,
-    })
+            TramInMemoryConfiguration.class})
     static class Config {
     }
 
@@ -44,9 +39,6 @@ public class MessageConsumerInMemoryTest {
         RestAssured.port = port;
     }
 
-
-    @Autowired
-    private AssertableMessageHandler assertableMessageHandler;
 
     @Test
     public void shouldConsumeMessage() {
@@ -62,7 +54,11 @@ public class MessageConsumerInMemoryTest {
                 .statusCode(200);
 
         Eventually.eventually(100, 500, TimeUnit.MILLISECONDS, () -> {
-            assertableMessageHandler.assertEventPublished();
+            given().when()
+                    .log().all()
+                    .get("/messages?accountId=" + accountId)
+                    .then()
+                    .statusCode(200);
         });
 
     }

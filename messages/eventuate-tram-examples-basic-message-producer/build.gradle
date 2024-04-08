@@ -8,6 +8,7 @@ dependencies {
 
     runtimeOnly "io.eventuate.tram.core:eventuate-tram-spring-jdbc-$messageBroker"
     implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
 
     testImplementation "io.eventuate.tram.core:eventuate-tram-spring-testing-support-messaging:$eventuateTramVersion" // FIXME
     testImplementation "io.eventuate.tram.core:eventuate-tram-spring-in-memory"

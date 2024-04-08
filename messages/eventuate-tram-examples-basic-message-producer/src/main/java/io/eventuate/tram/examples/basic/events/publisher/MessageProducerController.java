@@ -27,7 +27,7 @@ public class MessageProducerController {
     @PostMapping("/produce")
     public void produce(@RequestBody ProduceRequest produceRequest) {
         logger.info("Producing {}", produceRequest);
-        messageProducer.send(messageConfigurationProperties.getChannel(), MessageBuilder.withPayload(String.format("Message: %s", produceRequest.accountId())).build());
+        messageProducer.send(messageConfigurationProperties.getChannel(), MessageBuilder.withPayload(String.valueOf(produceRequest.accountId())).build());
         logger.info("produced {}", produceRequest);
     }
 

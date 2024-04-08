@@ -3,6 +3,8 @@ logging:
     io:
       eventuate: INFO
 
+server.port: 8081
+
 spring:
   datasource:
     url: jdbc:mysql://${DOCKER_HOST_IP:localhost}/eventuate

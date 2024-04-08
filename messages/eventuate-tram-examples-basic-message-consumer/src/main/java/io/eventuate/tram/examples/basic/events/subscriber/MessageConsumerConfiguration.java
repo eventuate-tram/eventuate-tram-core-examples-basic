@@ -4,10 +4,12 @@ import io.eventuate.tram.examples.basic.commands.common.MessageConfigurationProp
 import io.eventuate.tram.messaging.consumer.MessageConsumer;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableConfigurationProperties(MessageConfigurationProperties.class)
+@ComponentScan
 public class MessageConsumerConfiguration {
 
     @Bean

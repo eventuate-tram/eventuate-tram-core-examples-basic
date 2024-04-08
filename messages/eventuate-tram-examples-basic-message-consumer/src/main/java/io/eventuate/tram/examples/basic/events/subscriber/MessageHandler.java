@@ -7,9 +7,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
+import java.util.stream.Collectors;
 
 public class MessageHandler {
 
@@ -35,5 +37,9 @@ public class MessageHandler {
 
   public BlockingQueue<Message> getQueue() {
     return queue;
+  }
+
+  public List<Message> getMessagesFor(String accountId) {
+    return queue.stream().filter(m -> accountId.equals(m.getPayload())).collect(Collectors.toList());
   }
 }
