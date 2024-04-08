@@ -3,6 +3,8 @@ logging:
     io:
       eventuate: INFO
 
+server.port: 8082
+
 eventuatelocal:
   kafka:
     bootstrap:

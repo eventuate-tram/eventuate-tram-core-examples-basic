@@ -1,2 +1,3 @@
 trigger_command: http POST http://localhost:8080/send customerId=101
-verify_url: http://localhost:8080/replies
+verify_urls: 
+  - http://localhost:8080/replies

@@ -10,11 +10,11 @@ import yaml
 dir = sys.argv[1]
 gradle_options = sys.argv[2:]
 
-with open('commands/end-to-end-test-config.yaml', 'r') as file:
+with open(f"{dir}/end-to-end-test-config.yaml", 'r') as file:
     data = yaml.safe_load(file)
 
 trigger_command = data["trigger_command"]
-verify_url = data["verify_url"]
+verify_urls = data["verify_urls"]
 
 def run_gradle(subproject):
     print(f"Running {subproject}")
@@ -50,15 +50,16 @@ def trigger_sending():
         sys.exit(1)
 
 def wait_for_completion():
-    print(f"Waiting for replies at {verify_url}")
-    while True:
-        response = requests.get(verify_url)
+    for verify_url in verify_urls:
+        print(f"Waiting for replies at {verify_url}")
+        while True:
+            response = requests.get(verify_url)
 
-        if response.status_code != 200:
-            print(f"Failed to get replies {response.status_code}")
-            time.sleep(1)
-        else:
-            break
+            if response.status_code != 200:
+                print(f"Failed to get replies {response.status_code}")
+                time.sleep(1)
+            else:
+                break
 
 def stop_subprocesses(): 
     print("Stopping processes...")
@@ -72,7 +73,7 @@ subprojects = list(filter(lambda file: "eventuate-" in file and not ("common" in
 
 subprocesses = start_services(subprojects, run_gradle)
 
-wait_for_healthy([8080, 8081])
+wait_for_healthy(list(range(8080, 8080 + len(subprojects))))
 
 trigger_sending()
 

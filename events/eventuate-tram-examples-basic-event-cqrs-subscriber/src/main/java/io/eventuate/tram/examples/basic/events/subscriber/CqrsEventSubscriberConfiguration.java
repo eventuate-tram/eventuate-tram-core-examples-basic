@@ -6,12 +6,14 @@ import io.eventuate.tram.examples.basic.events.common.EventConfigurationProperti
 import io.eventuate.tram.spring.consumer.common.TramNoopDuplicateMessageDetectorConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 @Configuration
 @Import(TramNoopDuplicateMessageDetectorConfiguration.class)
 @EnableConfigurationProperties(EventConfigurationProperties.class)
+@ComponentScan
 public class CqrsEventSubscriberConfiguration {
 
     @Bean

@@ -3,7 +3,7 @@ logging:
     io:
       eventuate: DEBUG
 
-server.port: 8081
+server.port: 8082
 
 spring:
   datasource:

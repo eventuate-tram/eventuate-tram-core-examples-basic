@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 
@@ -38,4 +39,17 @@ public class AccountEventsConsumer {
   public BlockingQueue<DomainEventEnvelope<AccountDebited>> getQueue() {
     return queue;
   }
+
+  public List<DomainEventEnvelope<AccountDebited>> getEventsFor(String aggregateId) {
+    DomainEventEnvelope<AccountDebited> event;
+    System.out.printf("looking for events for %s\n", aggregateId);
+    while ((event = queue.poll()) != null) {
+      System.out.printf("got event %s\n", event.getAggregateId());
+      if (event.getAggregateId().equals(aggregateId)) {
+        return List.of(event);
+      }
+    }
+    return List.of();
+  }
+
 }

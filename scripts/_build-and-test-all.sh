@@ -20,5 +20,6 @@ echo $GRADLE_PROPERTIES
 ./gradlew $GRADLE_PROPERTIES build
 
 ./run-end-to-end-test.py commands $GRADLE_PROPERTIES
+./run-end-to-end-test.py events $GRADLE_PROPERTIES
 
 ./gradlew $GRADLE_PROPERTIES stopServices

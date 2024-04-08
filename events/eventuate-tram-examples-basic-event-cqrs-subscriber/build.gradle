@@ -9,7 +9,8 @@ dependencies {
 
     runtimeOnly "io.eventuate.tram.core:eventuate-tram-spring-consumer-$messageBroker"
 
-    implementation "org.springframework.boot:spring-boot-starter"
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
 
     testImplementation project(":events:eventuate-tram-examples-basic-event-publisher")
 

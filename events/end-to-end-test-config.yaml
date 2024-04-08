@@ -1,0 +1,4 @@
+trigger_command: http POST localhost:8080/publish accountId=9992 amount=12
+verify_urls: 
+  - http://localhost:8081/events?accountId=9992
+  - http://localhost:8082/events?accountId=9992
