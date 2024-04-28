@@ -10,20 +10,6 @@ spring:
     password: mysqlpw
     driver-class-name: com.mysql.cj.jdbc.Driver
 
-eventuatelocal:
-  kafka:
-    bootstrap:
-      servers: ${DOCKER_HOST_IP:localhost}:9092
-  zookeeper:
-    connection:
-      string: ${DOCKER_HOST_IP:localhost}:2181
-
-activemq:
-  url: tcp://${DOCKER_HOST_IP:localhost}:61616
-
-rabbitmq:
-  broker:
-    addresses: ${DOCKER_HOST_IP:localhost}
 
 ---
 spring:

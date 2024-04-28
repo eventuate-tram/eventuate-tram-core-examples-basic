@@ -6,7 +6,7 @@ dependencies {
 
     implementation "io.eventuate.tram.core:eventuate-tram-spring-messaging-starter"
 
-    runtimeOnly "io.eventuate.tram.core:eventuate-tram-spring-jdbc-$messageBroker"
+    runtimeOnly "io.eventuate.tram.core:eventuate-tram-spring-producer-jdbc"
     implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "org.springframework.boot:spring-boot-starter-actuator"
 
