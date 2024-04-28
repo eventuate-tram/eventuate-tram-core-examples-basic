@@ -28,7 +28,6 @@ public class CreditManagementCommandHandlers {
     System.out.println("customerId=" + cm.getCommand().getCustomerId());
     System.out.println("cm=" + cm);
     return withSuccess();
-
   }
 
 

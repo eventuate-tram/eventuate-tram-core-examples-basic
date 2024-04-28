@@ -23,9 +23,4 @@ public class CqrsEventSubscriberConfiguration {
                 target.domainEventHandlers());
     }
 
-    @Bean
-    public AccountEventsConsumer accountEventsConsumer() {
-        return new AccountEventsConsumer();
-    }
-
 }

@@ -20,9 +20,4 @@ public class EventSubscriberConfiguration {
                 target.domainEventHandlers());
     }
 
-    @Bean
-    public AccountEventsConsumer accountEventsConsumer() {
-        return new AccountEventsConsumer();
-    }
-
 }

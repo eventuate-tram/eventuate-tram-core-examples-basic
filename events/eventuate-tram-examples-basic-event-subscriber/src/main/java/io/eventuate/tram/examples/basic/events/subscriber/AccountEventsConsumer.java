@@ -7,21 +7,22 @@ import io.eventuate.tram.examples.basic.events.common.EventConfigurationProperti
 import io.eventuate.tram.examples.basic.events.domain.AccountDebited;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 
+@Component
 public class AccountEventsConsumer {
 
   private final Logger logger = LoggerFactory.getLogger(getClass());
   private final BlockingQueue<DomainEventEnvelope<AccountDebited>> queue = new LinkedBlockingDeque<>();
 
-  @Autowired
-  private EventConfigurationProperties eventConfigurationProperties;
+  private final EventConfigurationProperties eventConfigurationProperties;
 
-  public AccountEventsConsumer() {
+  public AccountEventsConsumer(EventConfigurationProperties eventConfigurationProperties) {
+    this.eventConfigurationProperties = eventConfigurationProperties;
   }
 
   public DomainEventHandlers domainEventHandlers() {

@@ -2,12 +2,11 @@ package io.eventuate.tram.examples.basic.commands.producer;
 
 
 import io.eventuate.tram.commands.producer.CommandProducer;
-import io.eventuate.tram.examples.basic.commands.common.ReserveCreditCommand;
 import io.eventuate.tram.examples.basic.commands.common.CommandConfigurationProperties;
+import io.eventuate.tram.examples.basic.commands.common.ReserveCreditCommand;
 import io.eventuate.tram.messaging.common.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
@@ -22,7 +21,6 @@ public class CommandProducingService {
     private final CommandReplyHandler commandReplyHandler;
     private final CommandConfigurationProperties commandConfigurationProperties;
 
-    @Autowired
     public CommandProducingService(CommandProducer commandProducer, CommandReplyHandler commandReplyHandler, CommandConfigurationProperties commandConfigurationProperties) {
         this.commandProducer = commandProducer;
         this.commandReplyHandler = commandReplyHandler;
