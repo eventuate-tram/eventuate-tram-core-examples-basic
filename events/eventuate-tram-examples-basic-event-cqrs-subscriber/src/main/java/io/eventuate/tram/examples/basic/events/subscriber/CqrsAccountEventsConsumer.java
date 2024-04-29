@@ -14,14 +14,14 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 
 @Component
-public class AccountEventsConsumer {
+public class CqrsAccountEventsConsumer {
 
   private final Logger logger = LoggerFactory.getLogger(getClass());
   private final BlockingQueue<DomainEventEnvelope<AccountDebited>> queue = new LinkedBlockingDeque<>();
 
   private final EventConfigurationProperties eventConfigurationProperties;
 
-  public AccountEventsConsumer(EventConfigurationProperties eventConfigurationProperties) {
+  public CqrsAccountEventsConsumer(EventConfigurationProperties eventConfigurationProperties) {
     this.eventConfigurationProperties = eventConfigurationProperties;
   }
 

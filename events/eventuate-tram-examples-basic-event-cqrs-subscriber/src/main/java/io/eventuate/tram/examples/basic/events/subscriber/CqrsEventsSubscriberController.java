@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CqrsEventsSubscriberController {
 
-    private final AccountEventsConsumer accountEventsConsumer;
+    private final CqrsAccountEventsConsumer accountEventsConsumer;
 
-    public CqrsEventsSubscriberController(AccountEventsConsumer accountEventsConsumer) {
+    public CqrsEventsSubscriberController(CqrsAccountEventsConsumer accountEventsConsumer) {
         this.accountEventsConsumer = accountEventsConsumer;
     }
 
