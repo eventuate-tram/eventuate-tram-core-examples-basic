@@ -33,7 +33,7 @@ public class AccountEventsConsumer {
   }
 
   public void handleAccountDebited(DomainEventEnvelope<AccountDebited> event) {
-    logger.info("Got event {}", event);
+    logger.info("Got event {} for amount {}", event, event.getEvent().amount());
     queue.add(event);
   }
 

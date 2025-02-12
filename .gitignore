@@ -8,3 +8,5 @@ out
 target
 generated_config.yml
 .DS_Store
+bin
+/.vscode/settings.json
