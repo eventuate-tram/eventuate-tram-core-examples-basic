@@ -16,7 +16,7 @@ cat >> generated_config.yml <<END
       - eventuate-gradle-build-and-test/build-and-test:
           name: $build_script_name
           script: ./$build_script
-          machine_image: ubuntu-2204:2023.07.2
+          machine_image: ubuntu-2204:2024.01.1
           java_version_to_install: '17'
 
 END
