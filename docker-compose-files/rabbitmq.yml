@@ -1,8 +1,7 @@
-version: '3'
 services:
 
   broker:
-    build: ./rabbitmq
+    build: ../rabbitmq
     ports:
       - 5672:5672
 
