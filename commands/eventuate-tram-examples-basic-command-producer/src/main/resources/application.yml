@@ -27,7 +27,9 @@ rabbitmq:
 
 ---
 spring:
-  profiles: postgres
+  config:
+    activate:
+      on-profile: postgres
   datasource:
     url: jdbc:postgresql://${DOCKER_HOST_IP:localhost}/eventuate
     username: eventuate
