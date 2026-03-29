@@ -13,8 +13,11 @@ buildscript {
 subprojects {
     apply plugin: "java-library"
 
-    sourceCompatibility = 17
-    targetCompatibility = 17
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(17)
+        }
+    }
 
     repositories {
         mavenCentral()

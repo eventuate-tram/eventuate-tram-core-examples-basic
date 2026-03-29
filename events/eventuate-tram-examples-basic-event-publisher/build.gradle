@@ -11,6 +11,7 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-actuator"
 
     testRuntimeOnly "io.eventuate.tram.core:eventuate-tram-spring-jdbc-$messageBroker"
+    testRuntimeOnly "org.junit.platform:junit-platform-launcher:1.14.3"
 
     testImplementation "io.eventuate.tram.core:eventuate-tram-spring-testing-support-messaging:$eventuateTramVersion" // FIXME
     testImplementation "io.eventuate.tram.core:eventuate-tram-spring-in-memory"
