@@ -4,4 +4,8 @@ services:
     build: ../rabbitmq
     ports:
       - 5672:5672
-
+    healthcheck:
+      test: ["CMD", "rabbitmqctl", "status"]
+      interval: 5s
+      timeout: 10s
+      retries: 20

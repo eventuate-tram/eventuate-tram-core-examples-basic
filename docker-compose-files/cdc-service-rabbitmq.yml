@@ -1,0 +1,5 @@
+services:
+  cdcservice:
+    depends_on:
+      broker:
+        condition: service_healthy

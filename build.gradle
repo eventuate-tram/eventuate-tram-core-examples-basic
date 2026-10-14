@@ -67,7 +67,7 @@ dockerCompose {
 
     mysqlbinlograbbitmq {
         projectName = null
-        useComposeFiles = ["docker-compose-files/mysql.yml", "docker-compose-files/rabbitmq.yml", "docker-compose-files/cdc-service.yml"]
+        useComposeFiles = ["docker-compose-files/mysql.yml", "docker-compose-files/rabbitmq.yml", "docker-compose-files/cdc-service.yml", "docker-compose-files/cdc-service-rabbitmq.yml"]
         environment.put "SPRING_PROFILES_ACTIVE", "RabbitMQ"
     }
 
@@ -85,7 +85,7 @@ dockerCompose {
 
     postgrespollingrabbitmq {
         projectName = null
-        useComposeFiles = ["docker-compose-files/postgres.yml", "docker-compose-files/rabbitmq.yml", "docker-compose-files/cdc-service.yml"]
+        useComposeFiles = ["docker-compose-files/postgres.yml", "docker-compose-files/rabbitmq.yml", "docker-compose-files/cdc-service.yml", "docker-compose-files/cdc-service-rabbitmq.yml"]
         environment.put "SPRING_PROFILES_ACTIVE", "EventuatePolling,RabbitMQ,Postgres"
     }
 
@@ -103,7 +103,7 @@ dockerCompose {
 
     postgreswalrabbitmq {
         projectName = null
-        useComposeFiles = ["docker-compose-files/postgres.yml", "docker-compose-files/rabbitmq.yml", "docker-compose-files/cdc-service.yml"]
+        useComposeFiles = ["docker-compose-files/postgres.yml", "docker-compose-files/rabbitmq.yml", "docker-compose-files/cdc-service.yml", "docker-compose-files/cdc-service-rabbitmq.yml"]
         environment.put "SPRING_PROFILES_ACTIVE", "PostgresWal,RabbitMQ,Postgres"
     }
 
