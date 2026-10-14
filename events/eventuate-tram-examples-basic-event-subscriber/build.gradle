@@ -7,7 +7,7 @@ dependencies {
     implementation "io.eventuate.tram.core:eventuate-tram-spring-events-subscriber-starter"
 
     runtimeOnly "io.eventuate.tram.core:eventuate-tram-spring-jdbc-$messageBroker"
-    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-webmvc"
     implementation "org.springframework.boot:spring-boot-starter-actuator"
 
     testImplementation project(":events:eventuate-tram-examples-basic-event-publisher")
@@ -16,8 +16,8 @@ dependencies {
     testImplementation "io.eventuate.util:eventuate-util-test"
 
     testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testRuntimeOnly "org.junit.platform:junit-platform-launcher:1.14.3"
-    testImplementation "io.rest-assured:spring-mock-mvc"
+    testRuntimeOnly "org.junit.platform:junit-platform-launcher"
+    testImplementation "io.rest-assured:spring-mock-mvc:$restAssuredVersion"
 
 }
 
